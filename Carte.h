@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 enum Etat{Nonref,SurTerrain,DansMain,DansDeck,DansCimetiere};
+enum Attribut{Guerrier,Mage,Paladin};//Guerrier +atq Mage+pdv Paladin Equilibre
+
 class Carte {
 
 protected:
