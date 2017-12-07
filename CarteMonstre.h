@@ -3,14 +3,18 @@
 class CarteMonstre : public Carte
 
 {protected:
-	int pts_atk;
-	int pdv;
-	Etat mon_etat;
-	Attribut mon_attribut;
+	int _pts_atk;
+	int _pdv;
+	Etat _mon_etat;
+	Attribut _mon_attribut;
 public:
 	std::string get_description();
-	std::string get_point_action();
-	Attribut get_attribut(); 
-
+	int get_point_action();
+	Attribut get_attribut();
+	Etat get_etat();
+	int get_pts_atk();
+	int get_pdv(); 
+	
+	CarteMonstre(std::string nom,int pts_action,int pts_atk,int _pdv,Etat _mon_etat,Attribut _mon_attribut);
 
 };
