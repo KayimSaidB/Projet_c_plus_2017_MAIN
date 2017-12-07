@@ -19,4 +19,8 @@ CarteMonstre::CarteMonstre(std::string nom,int pts_action,int pts_atk,int pdv,Et
 	int CarteMonstre::get_pts_atk(){return _pts_atk}
 	int CarteMonstre::get_pdv(){return _pdv}
 
-	
+	std::vector<Carte*>CarteMonstre::generate_deck(){
+
+
+
+	}

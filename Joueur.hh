@@ -17,9 +17,10 @@ public:
 	int get_Nb_carte_deck();
 	int get_pointdevie(); 
 	std::string get_nom();
-	void pioche_une_carte();
-	void pose_une_carte();
-	void declarer_une_attaque();
+	void pioche_une_carte(std::string macarte);
+	void pose_une_carte(std::string macarte);
+	void declarer_une_attaque(std::string macarte);
+
 
 
 };
