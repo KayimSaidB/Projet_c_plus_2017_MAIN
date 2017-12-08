@@ -1,3 +1,5 @@
+#ifndef __JOUEUR_HH
+#define __JOUEUR_HH
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,10 +19,12 @@ public:
 	int get_Nb_carte_deck();
 	int get_pointdevie(); 
 	std::string get_nom();
-	void pioche_une_carte(std::string macarte);
+	void pioche_une_carte();
 	void pose_une_carte(std::string macarte);
-	void declarer_une_attaque(std::string macarte);
+	void declarer_une_attaque(std::string macarte,std::string carteadverse);
 
 
 
 };
+
+#endif

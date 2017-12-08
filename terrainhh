@@ -1,0 +1,16 @@
+#ifndef __JOUEUR_HH
+#define __JOUEUR_HH
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include "Carte.h"
+#include "joueur.h"
+class Terrain{
+
+
+
+
+};
+
+#endif

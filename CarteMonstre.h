@@ -1,4 +1,6 @@
 #include "Carte.h"
+#ifndef __CARTEMONSTRE_HH
+#define __CARTEMONSTRE_HH
 
 class CarteMonstre : public Carte
 
@@ -18,3 +20,4 @@ public:
 	CarteMonstre(std::string nom,int pts_action,int pts_atk,int _pdv,Etat _mon_etat,Attribut _mon_attribut);
 
 };
+#endif

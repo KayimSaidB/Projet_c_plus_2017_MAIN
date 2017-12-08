@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#ifndef __CARTE_HH
+#define __CARTE_HH
+
 enum Etat{Nonref,SurTerrain,DansMain,DansDeck,DansCimetiere};
 enum Attribut{Guerrier,Mage,Paladin};//Guerrier +atq Mage+pdv Paladin Equilibre
 
@@ -16,3 +19,4 @@ virtual std::string get_point_action() const=0;
 
 
 };
+#endif
