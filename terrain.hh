@@ -5,15 +5,16 @@
 #include <string>
 #include <vector>
 #include "Carte.h"
-#include "joueur.h"
 class Terrain{
 protected:
-int nb_carte_terrain;
 std::vector<Carte*> carte_joueur1;
 std::vector<Carte*> carte_joueur2;
-
+int nbretour;
+int tempstour;
 
 public:
+	int get_nbrtour();
+	int get_tempstour();
 
 
 
