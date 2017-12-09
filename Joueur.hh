@@ -23,6 +23,8 @@ public:
 	void pioche_une_carte();
 	void pose_une_carte(std::string macarte, Terrain terrainactuel);
 	void declarer_une_attaque(std::string macarte,std::string carteadverse,Terrain actuel);
+	Carte choisir_carte_dans_main(std::vector<Carte*>_carte_main);
+	void affiche(ostream& out, Carte)const;
 
 
 

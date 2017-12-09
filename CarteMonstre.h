@@ -9,6 +9,7 @@ class CarteMonstre : public Carte
 	int _pdv;
 	Etat _mon_etat;
 	Attribut _mon_attribut;
+	std::string nom;
 public:
 	std::string get_description();
 	int get_point_action();

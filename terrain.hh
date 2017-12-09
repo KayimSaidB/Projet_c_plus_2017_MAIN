@@ -7,8 +7,7 @@
 #include "Carte.h"
 class Terrain{
 protected:
-std::vector<Carte*> carte_joueur1;
-std::vector<Carte*> carte_joueur2;
+std::vector<Carte*> carte_joueur;
 int nbretour;
 int tempstour;
 
