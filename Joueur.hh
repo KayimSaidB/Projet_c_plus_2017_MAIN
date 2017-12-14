@@ -21,9 +21,9 @@ public:
 	int get_pointdevie(); 
 	std::string get_nom();
 	void pioche_une_carte();
-	void pose_une_carte(std::string macarte, Terrain terrainactuel);
+	void pose_une_carte(Terrain terrainactuel);
 	void declarer_une_attaque(std::string macarte,std::string carteadverse,Terrain actuel);
-	Carte choisir_carte_dans_main(std::vector<Carte*>_carte_main);
+	Carte choisir_carte_dans_main();
 	void affiche(ostream& out, Carte)const;
 
 

@@ -33,7 +33,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom;){
 		int nbrcarte = get_Nb_carte_main();
 		
 		choix:
-		Carte kayim = choisir_carte_dans_main(std::vector<Carte*>_carte_main)
+		Carte kayim = choisir_carte_dans_main();
 		
 		if (nbrcarte==0)
 			return "Vous n'avez plus de carte. Piochez s'en une !";
@@ -52,13 +52,13 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom;){
 				
 	}
 	
-	Carte Joueur::choisir_carte_dans_main(std::vector<Carte*>_carte_main){
+	Carte Joueur::choisir_carte_dans_main(){
 			
 		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 		int i = 0;
 		int sizecart = get_Nb_carte_main();
 		while(choix == 0 && i <= get_Nb_carte_main()){
-			affiche(_carte_main[i];
+			affiche(_carte_main[i]);
 			
 			std::cout << "Voulez cette carte ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precdent" <<"\n" ;
 			std::cin >> choix;
