@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+
 int main()
 {
     // Crée la fenêtre principale avec comme titre "Hello World"
@@ -51,5 +52,8 @@ int i=0;
         window.display();  // Met à jour la fenêtre
     }
     return EXIT_SUCCESS;
+
+
+
 }
 

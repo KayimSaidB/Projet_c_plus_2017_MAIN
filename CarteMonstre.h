@@ -11,13 +11,15 @@ class CarteMonstre : public Carte
 	Attribut _mon_attribut;
 	std::string nom;
 public:
-	std::string get_description();
-	int get_point_action();
+	std::string get_description() const;
+	int get_point_action()const;
 	Attribut get_attribut();
 	Etat get_etat();
 	int get_pts_atk();
 	int get_pdv(); 
-	
+	void set_pdv(int newpdv);
+	std::string get_nom();
+	void affiche() const;
 	CarteMonstre(std::string nom,int pts_action,int pts_atk,int _pdv,Etat _mon_etat,Attribut _mon_attribut);
 
 };
