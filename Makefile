@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic
+CFLAGS=-W -Wall -ansi -pedantic -g
 LDFLAGS=
 EXEC=exec
 SRC= terrain.cc joueur.cc CarteMonstre.cc main.cc
@@ -12,7 +12,7 @@ exec: $(OBJ)
 
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c  $< $(CFLAGS)
 
 .PHONY: clean mrproper
 

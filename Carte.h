@@ -16,7 +16,7 @@ std::string _nom;
 public:
 virtual std::string get_description() const=0;
 virtual int get_point_action() const=0;
-
+virtual void affiche() const=0;
 
 };
 #endif

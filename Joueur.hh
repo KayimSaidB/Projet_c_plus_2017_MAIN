@@ -22,10 +22,11 @@ public:
 	int get_pointdevie(); 
 	std::string get_nom();
 	void pioche_une_carte();
-	void pose_une_carte(Terrain terrainactuel);
-	void declarer_une_attaque(std::string macarte,std::string carteadverse,Terrain actuel);
-	CarteMonstre choisir_carte_dans_main();
+	//void pose_une_carte(Terrain terrainactuel);
+	void declarer_une_attaque(Terrain *actuel);
+	void choisir_carte_dans_main_et_poser(Terrain *terrainactuel);
 	void init_deck();
+	void init_deck2();
 	void init_main();
 
 

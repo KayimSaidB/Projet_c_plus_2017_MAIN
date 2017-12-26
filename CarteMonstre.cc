@@ -24,7 +24,13 @@ CarteMonstre::CarteMonstre(std::string nom,int pts_action,int pts_atk,int pdv,Et
 	void CarteMonstre::affiche()const{
 		
 		
-		std::cout << _nom << std::endl; 
+		std::cout <<"Nom : " << _nom <<std::endl; 
+		std::cout <<"Point de vie : " << _pts_atk <<std::endl;
+		std::cout <<"Point d'attaque :" << _pdv <<std::endl; 
+		std::cout <<"Point d'action : " << _pts_action <<std::endl; 
+
+ 
+
 				
 	}
 

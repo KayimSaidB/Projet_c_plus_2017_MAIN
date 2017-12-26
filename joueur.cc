@@ -27,7 +27,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 
 	}
 	
-	void Joueur::pose_une_carte(Terrain terrainactuel){
+	/*void Joueur::pose_une_carte(Terrain terrainactuel){
 		
 		int nbrcarte = get_Nb_carte_main();
 		
@@ -38,37 +38,153 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 			std::cout << "Vous n'avez plus de carte. Piochez en une !" <<std::endl ;
 			return;
 			
-		if(kayim.get_point_action() < _pts_action){
-			std::cout <<"Impossible de poser cette carte"<<std::endl;
-			goto choix;
-		}
-				
-		else{
-			_pts_action =_pts_action- kayim.get_point_action();
-			terrainactuel.push_that_card( &kayim,_numero_joueur);
-		}
+
 		
-	}
-	void Joueur::declarer_une_attaque(std::string macarte,std::string carteadverse,Terrain actuel){
+	}*/
+	void Joueur::declarer_une_attaque(Terrain *terrainactuel)
+	{	
+int attaque,attaquant;
+if (_numero_joueur==1){
+	///CAS OU joueur 1 attaque joueur 2
+		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
+		int i = 0;
+		bool cestbon=false;
+		while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon==false){
+			((terrainactuel->get_carte_joueur1())[i]).affiche();
+			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
+			std::cin >> choix;
+			switch (choix){
+				case 1 : {
+			int attaquant = i;
+			cestbon=true;
+			break;
+			break;
+				}
 				
-	}
+				case 2 : {
+					i +=1;
+					std::cout << "okaay" << std::endl;
+				break;
+						}
+				case 3 : 
+				{
+						i-=1;
+				break;
+			}
+			}
+
+		}
+			cestbon=false;
+			while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
+			((terrainactuel->get_carte_joueur2())[i]).affiche();
+			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
+			std::cin >> choix;
+			switch (choix){
+				case 1 : {
+			int attaque = i;
+			cestbon=true;
+			break;
+			break;
+				}
+				
+				case 2 : {
+					i +=1;
+					std::cout << "okaay" << std::endl;
+				break;
+						}
+				case 3 : 
+				{
+						i-=1;
+				break;
+			}
+			}
+}
+}
+else {
+	///CAS OU joueur 2 attaque joueur 1
+
+		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
+		int i = 0;
+		bool cestbon=false;
+		while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
+			((terrainactuel->get_carte_joueur2())[i]).affiche();
+			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
+			std::cin >> choix;
+			switch (choix){
+				case 1 : {
+			int attaquant = i;
+			cestbon=true;
+			break;
+			break;
+				}
+				
+				case 2 : {
+					i +=1;
+					std::cout << "okaay" << std::endl;
+				break;
+						}
+				case 3 : 
+				{
+						i-=1;
+				break;
+			}
+			}
+
+		}
+		cestbon=false;
+			while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon ==false){
+			((terrainactuel->get_carte_joueur1())[i]).affiche();
+			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
+			std::cin >> choix;
+			switch (choix){
+				case 1 : {
+			int attaque = i;
+			cestbon=true;
+			break;
+			break;
+				}
+				
+				case 2 : {
+					i +=1;
+					std::cout << "okaay" << std::endl;
+				break;
+						}
+				case 3 : 
+				{
+						i-=1;
+				break;
+			}
+			}
+}
+}
+
+terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
+
+}
+
+
+				
+	
 	void Joueur::init_deck(){
 		_carte_deck.push_back(CarteMonstre("Tao Pai Pai evadé fiscal",10,15,16,DansDeck,Guerrier));
 		_carte_deck.push_back(CarteMonstre("Freezer evadé fiscal",50,1500,1600,DansDeck,Guerrier));
 		_carte_deck.push_back(CarteMonstre("Jiren evadé fiscal",50000,15000,16000,DansDeck,Guerrier));
-		int i;
-		for (i=0;i<3;i++) _carte_deck[i].affiche();
-
-
+		
 	}
-	CarteMonstre Joueur::choisir_carte_dans_main(){
+void Joueur::init_deck2(){
+		_carte_deck.push_back(CarteMonstre("Goku petit evadé fiscal",10,15,16,DansDeck,Guerrier));
+		_carte_deck.push_back(CarteMonstre("Goku Ssj 1 evadé fiscal",50,1500,1600,DansDeck,Guerrier));
+		_carte_deck.push_back(CarteMonstre("Goku Ultra Instinct evadé fiscal",50000,15000,16000,DansDeck,Guerrier));
+		
+	}
+
+
+	void Joueur::choisir_carte_dans_main_et_poser(Terrain *terrainactuel){
 			
 		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 		int i = 0;
 		int sizecart = get_Nb_carte_main();
-		std::cout <<"nb carte main" << std::endl;
-		std::cout << sizecart << std::endl;
-		while(choix == 0 || i <= get_Nb_carte_main()){
+		while(choix == 0 || i <= _carte_main.size()){
 			_carte_main[i].affiche();
 			
 			std::cout << "Voulez cette carte ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precdent" <<"\n" ;
@@ -76,11 +192,26 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 			
 			switch (choix){
 				case 1 : {
-				CarteMonstre tmp = _carte_main[i];
-				_carte_main.erase(_carte_main.begin()+(i%sizecart));
-				return tmp;
-			
-				break;
+			CarteMonstre kayim = _carte_main[i];
+			std::cout << _pts_action <<std::endl;
+
+			if(kayim.get_point_action() > _pts_action){
+			std::cout <<"Impossible de poser cette carte"<<std::endl;
+			std::cout <<" Plus assez de point d'action" << std::endl;
+			break;
+				}
+				
+			else{
+			_pts_action =_pts_action- kayim.get_point_action();
+			terrainactuel->push_that_card( kayim,_numero_joueur);
+			std::cout <<" work" << std::endl;
+
+			_carte_main.erase(_carte_main.begin()+(i%sizecart));
+			return;
+			break;
+
+
+					}
 					} 
 				case 2 : {
 					i +=1;
