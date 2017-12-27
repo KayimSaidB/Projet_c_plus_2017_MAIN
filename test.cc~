@@ -23,9 +23,9 @@ int main()
     sprite3.setColor(sf::Color(0, 255, 0));
     //sprite3.setRotation(90); // angle absolu
     //sprite3.resize(0.5,0.5);
-    sprite3.scale(sf::Vector2f(0.1f, 0.1f));
+    sprite3.scale(sf::Vector2f(0.5f, 0.5f));
     sprite3.setPosition(sf::Vector2f(10, 50)); // position absolue
-    sprite4.scale(sf::Vector2f(0.1f, 0.1f));
+    sprite4.scale(sf::Vector2f(0.5f, 0.5f));
     sprite4.setPosition(sf::Vector2f(10, 100));
      // facters d'échelle relatifs à l'échelle actuelle    // Crée un texte
     sf::Font font;
