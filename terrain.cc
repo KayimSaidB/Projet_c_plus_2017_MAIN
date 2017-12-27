@@ -45,8 +45,17 @@
 	Terrain::Terrain(int nbtour, int temps){_nbtour=nbtour; _temps=temps;}
 
 	 void Terrain::attack_enclenche(int attaquant, int attaque, int numerojoueur){
+	
+
 	 	if (numerojoueur==1){
-	 		_carte_joueur2[attaque].set_pdv(_carte_joueur2[attaque].get_pdv()-_carte_joueur1[attaquant].get_pts_atk());
+			std::cout << "avant attaque" << std::endl;
+
+	 		_carte_joueur2[attaque].affiche();
+	 		_carte_joueur2[attaque].set_pdv(_carte_joueur2[attaque].get_pdv()-_carte_joueur1[attaquant].get_pts_atk());	
+
+	 		_carte_joueur2[attaque].affiche();
+	 		std::cout << "apres attaque" << std::endl;
+
 	 		if (_carte_joueur2[attaque].get_pdv()<0) _carte_joueur2.erase(_carte_joueur2.begin()+attaque);
 
 	 	}

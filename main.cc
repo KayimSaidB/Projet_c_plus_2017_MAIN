@@ -23,5 +23,7 @@ int main(){
 	untypebien.declarer_une_attaque(&unbeauterrain);
 	unbeauterrain.afficher_terrain();
 	unsecondtypebien.declarer_une_attaque(&unbeauterrain);
+	unbeauterrain.afficher_terrain();
+
 	return 1;
 }

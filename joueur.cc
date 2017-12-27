@@ -49,16 +49,21 @@ if (_numero_joueur==1){
 		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 		int i = 0;
 		bool cestbon=false;
+		std::cout << "l'attaque s'enclenhce hf" << std::endl;
+
 		while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon==false){
 			((terrainactuel->get_carte_joueur1())[i]).affiche();
 			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
 			std::cin >> choix;
 			switch (choix){
 				case 1 : {
-			int attaquant = i;
+		    attaquant = i;
+			std::cout << "l'attaque s'enclenhce attaquant" << std::endl;
+	 		 	
+	 		 	std::cout << attaquant << std::endl;
 			cestbon=true;
 			break;
-			break;
+			
 				}
 				
 				case 2 : {
@@ -74,15 +79,22 @@ if (_numero_joueur==1){
 			}
 
 		}
-			cestbon=false;
+			cestbon=false; i=0;
 			while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
 			((terrainactuel->get_carte_joueur2())[i]).affiche();
 			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
 			std::cin >> choix;
 			switch (choix){
 				case 1 : {
-			int attaque = i;
+			attaque = i;
 			cestbon=true;
+			std::cout << "l'attaque s'enclenhce tkt" << std::endl;
+			std::cout << attaquant << std::endl;
+			std::cout << attaque<< std::endl;
+			std::cout << "l'attaque s'enclenhce tkt" << std::endl;
+
+			terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
+
 			break;
 			break;
 				}
@@ -99,6 +111,7 @@ if (_numero_joueur==1){
 			}
 			}
 }
+
 }
 else {
 	///CAS OU joueur 2 attaque joueur 1
@@ -106,13 +119,16 @@ else {
 		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 		int i = 0;
 		bool cestbon=false;
+		std::cout << "l'attaque s'enclenhce hf" << std::endl;
+
 		while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
 			((terrainactuel->get_carte_joueur2())[i]).affiche();
 			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
 			std::cin >> choix;
 			switch (choix){
 				case 1 : {
-			int attaquant = i;
+			 attaquant = i;
+	 		 	std::cout << attaquant << std::endl;
 			cestbon=true;
 			break;
 			break;
@@ -138,8 +154,11 @@ else {
 			std::cin >> choix;
 			switch (choix){
 				case 1 : {
-			int attaque = i;
+			 attaque = i;
+
 			cestbon=true;
+			terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
+
 			break;
 			break;
 				}
@@ -156,9 +175,10 @@ else {
 			}
 			}
 }
+//terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
+
 }
 
-terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
 
 }
 
