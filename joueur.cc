@@ -74,6 +74,8 @@ if (_numero_joueur==1){
 				case 3 : 
 				{
 						i-=1;
+						std::cout << "okaay" << std::endl;
+
 				break;
 			}
 			}
@@ -205,7 +207,7 @@ void Joueur::init_deck2(){
 		int i = 0;
 		int sizecart = get_Nb_carte_main();
 		while(choix == 0 || i <= _carte_main.size()){
-			_carte_main[i].affiche();
+			_carte_main[i%sizecart].affiche();
 			
 			std::cout << "Voulez cette carte ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precdent" <<"\n" ;
 			std::cin >> choix;
@@ -241,6 +243,7 @@ void Joueur::init_deck2(){
 				case 3 : 
 				{
 						i-=1;
+						std::cout << "okaay" << std::endl;
 				break;
 			}
 			}
