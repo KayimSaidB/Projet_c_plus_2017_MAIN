@@ -10,7 +10,7 @@ all: $(EXEC)
 exec: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 sfml-app: test.cc
-	 g++ -o sfml-app test.cc -lsfml-graphics -lsfml-window -lsfml-system
+	 g++ -o sfml-app Terrainarte.cc -lsfml-graphics -lsfml-window -lsfml-system
 
 %.o: %.c
 	$(CC) -o $@ -c  $< $(CFLAGS)
