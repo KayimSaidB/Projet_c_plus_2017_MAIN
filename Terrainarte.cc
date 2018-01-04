@@ -9,14 +9,17 @@ int main(){
     }
 
 	sf::Texture texture1;
-	texture1.loadFromFile("TerrainCarte.png");
+    sf::Texture texture2;
 
-	if(!texture1.loadFromFile("TerrainCarte.png"))
+    texture1.loadFromFile("StartScreen.png");
+	texture2.loadFromFile("TerrainCarte.png");
+
+	if(!texture2.loadFromFile("TerrainCarte.png") && !texture1.loadFromFile("StartScreen.png") )
 		{return EXIT_FAILURE;
 		}
 
-
-	sf::Sprite sprite(texture1);
+    sf::Sprite sprite(texture1);
+	sf::Sprite sprite2(texture2);
 
  // Boucle principale
 int i=0;
@@ -33,18 +36,21 @@ int i=0;
             	
                 window.close();
             	break;
-
-	//case sf::Event::MouseButtonPressed: 
-      //          sprite3.move(sf::Vector2f(15, 0)); // décalage relatif à la position actuelle        
-                   break;
+            case sf::Event::KeyPressed :
+                if(event.key.code == sf::Keyboard::Num1)
+                    i=1;
+            break;
         }
 	}
+     
+      
         window.clear(); // Efface l'écran
-        if (i==0) {
+       if (i==0) {
         window.draw(sprite); // Affiche le sprite
+       
 }
-	
-        window.display();  // Met à jour la fenêtre
+        else window.draw(sprite2);
+         window.display();
     }
     return EXIT_SUCCESS;
 
