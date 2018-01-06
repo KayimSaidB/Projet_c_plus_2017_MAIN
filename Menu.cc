@@ -9,7 +9,8 @@ Menu::Menu(double width, double height)
 
  
     fond.loadFromFile("yugi.png");
-
+    sf::Text text("Choix avec ESAPCE", font, 13);
+    text.setPosition(10,250);
 
 
     menu[0].setFont(font);

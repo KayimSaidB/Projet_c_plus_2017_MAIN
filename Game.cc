@@ -37,6 +37,7 @@ void Game::processEvents()
             window.close();
             break;
         case sf::Event::KeyPressed:
+            if(GameState == 0){
                 switch (event.key.code)
                 {
                     case sf::Keyboard::Up:
@@ -46,12 +47,20 @@ void Game::processEvents()
                     case sf::Keyboard::Down:
                         monmenu.moveDown();
                         monmenu.draw(window);
-                        break;
+                     
+                    break;
+                 }
                 }
             }
         if  ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
-            if (event.key.code == sf::Keyboard::Numpad1){
+            if (event.key.code == sf::Keyboard::Space){
                  GameState = 1;
+                    }
+                }
+
+        if  ((monmenu.getMenu(1)).getColor() ==  sf::Color::Black){
+            if (event.key.code == sf::Keyboard::Space){
+                GameState = 2;
                     }
                 }
         }
@@ -76,6 +85,15 @@ void Game::render()
         window.draw(spT);
     }
 
-    else monmenu.draw(window);
+    else {
+
+     if (GameState == 2){
+        window.close();
+        }
+    else monmenu.draw(window); 
+}
+
+
+    
     window.display();
 }
