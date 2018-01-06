@@ -19,7 +19,7 @@ public:
     int getSelectedItemIndex() { return selectedItemIndex; };
     sf::Text getMenu(int i){return menu[i];}
 
-    int selectedItemIndex = 1;
+    int selectedItemIndex = 0;
 
 private:
     sf::Font font;

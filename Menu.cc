@@ -13,7 +13,7 @@ Menu::Menu(double width, double height)
 
 
     menu[0].setFont(font);
-    menu[0].setColor(sf::Color::White);
+    menu[0].setColor(sf::Color::Black);
     menu[0].setString("Play");
     menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITMES + 1) * 1));
 
@@ -37,11 +37,11 @@ void Menu::draw(sf::RenderWindow &window)
 
 void Menu::moveUp()
 {
-    if (MAX_NUMBER_OF_ITMES - 1 <= selectedItemIndex+1 && selectedItemIndex+1 <= MAX_NUMBER_OF_ITMES)
+    if (selectedItemIndex == 1)
     { std::cout << selectedItemIndex  << std::endl;
         menu[selectedItemIndex].setColor(sf::Color::White);
 
-        selectedItemIndex--;
+        selectedItemIndex = 0;
         menu[selectedItemIndex].setColor(sf::Color::Black);
         std::cout << selectedItemIndex  << std::endl;
 
@@ -50,10 +50,11 @@ void Menu::moveUp()
 
 void Menu::moveDown()
 {
-    if (MAX_NUMBER_OF_ITMES - 2 <= selectedItemIndex + 1 && selectedItemIndex + 1 <= MAX_NUMBER_OF_ITMES-1)
+    if (selectedItemIndex == 0)
     {
         menu[selectedItemIndex].setColor(sf::Color::White);
-        selectedItemIndex++;
+        selectedItemIndex = 1;
         menu[selectedItemIndex].setColor(sf::Color::Black);
+        std::cout << selectedItemIndex  << std::endl;
     }
 }

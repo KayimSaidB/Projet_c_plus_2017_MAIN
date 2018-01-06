@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic -g -lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS=-W -Wall -ansi -pedantic -g -lsfml-graphics -lsfml-window -lsfml-system 
 LDFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
 EXEC=exec sfml-app
 SRC= terrain.cc joueur.cc CarteMonstre.cc main.cc Game.cc Menu.cc 

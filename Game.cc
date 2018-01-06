@@ -1,5 +1,7 @@
 #include "Game.hh"
 
+Menu monmenu(WIDTH, HEIGHT);
+
 Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !")
 {
     window.setFramerateLimit(60);
@@ -10,8 +12,10 @@ void Game::run()
 
 {   
 
+
     while (window.isOpen())
-    {
+    {   
+        
         processEvents();
         update();
         render();
@@ -21,8 +25,8 @@ void Game::run()
 void Game::processEvents()
 {
     sf::Event event;
-        Menu monmenu(WIDTH, HEIGHT);
 
+    
     while (window.pollEvent(event))
     {
         switch (event.type)
@@ -35,41 +39,41 @@ void Game::processEvents()
                 {
                     case sf::Keyboard::Up:
                         monmenu.moveUp();
-                        std::cout << ((monmenu.getMenu(0)).getColor()==sf::Color::Black) <<std::endl;
                         monmenu.draw(window);
-
                         break;
                     case sf::Keyboard::Down:
                         monmenu.moveDown();
-                      std::cout << ((monmenu.getMenu(0)).getColor()==sf::Color::Black) <<std::endl;
                         monmenu.draw(window);
-
                         break;
                 }
             }
-        if ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
-                if (event.key.code == sf::Keyboard::Space){
-                   sf::Texture Terrain;
-                   Terrain.loadFromFile("Terrain.png");
-                    sf::Sprite spT(Terrain);
-                    window.draw(spT);
-                }
-                break;     
         }
-    }
-    }
+
+      
+}
 
 
 void Game::update()
 {
+    if  ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
+            sf::Event event;
+                        if (event.key.code == sf::Keyboard::Numpad0){
+                            sf::Texture Terrain;
+                            std::cout << "Bogogoogogogo \n";
+                            window.clear();
+                            Terrain.loadFromFile("Terrain.png");
+                            sf::Sprite spT(Terrain);
+                            window.draw(spT);
+                            }
+                        }
+        else   monmenu.draw(window);
+    
 }
 
-void Game::render(sf::Menu unmenu)
+void Game::render()
 {
     window.clear();
-
-  //  Menu menu(WIDTH, HEIGHT);
-    menu.draw(window);
-
+ 
+    monmenu.draw(window);            
     window.display();
 }
