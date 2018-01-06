@@ -21,6 +21,8 @@ void Game::run()
 void Game::processEvents()
 {
     sf::Event event;
+        Menu monmenu(WIDTH, HEIGHT);
+
     while (window.pollEvent(event))
     {
         switch (event.type)
@@ -28,37 +30,45 @@ void Game::processEvents()
         case sf::Event::Closed:
             window.close();
             break;
-        /*case sf::Event::KeyPressed:
+        case sf::Event::KeyPressed:
                 switch (event.key.code)
                 {
                     case sf::Keyboard::Up:
-                        menu.moveUp();
+                        monmenu.moveUp();
+                        std::cout << ((monmenu.getMenu(0)).getColor()==sf::Color::Black) <<std::endl;
+                        monmenu.draw(window);
+
                         break;
                     case sf::Keyboard::Down:
-                        menu.moveDown();
+                        monmenu.moveDown();
+                      std::cout << ((monmenu.getMenu(0)).getColor()==sf::Color::Black) <<std::endl;
+                        monmenu.draw(window);
+
                         break;
                 }
-        case menu.menu[0].getColor() == "Black":
+            }
+        if ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
                 if (event.key.code == sf::Keyboard::Space){
                    sf::Texture Terrain;
                    Terrain.loadFromFile("Terrain.png");
                     sf::Sprite spT(Terrain);
                     window.draw(spT);
                 }
-                break; */       
+                break;     
         }
     }
-}
+    }
+
 
 void Game::update()
 {
 }
 
-void Game::render()
+void Game::render(sf::Menu unmenu)
 {
     window.clear();
 
-    Menu menu(WIDTH, HEIGHT);
+  //  Menu menu(WIDTH, HEIGHT);
     menu.draw(window);
 
     window.display();

@@ -38,10 +38,13 @@ void Menu::draw(sf::RenderWindow &window)
 void Menu::moveUp()
 {
     if (MAX_NUMBER_OF_ITMES - 1 <= selectedItemIndex+1 && selectedItemIndex+1 <= MAX_NUMBER_OF_ITMES)
-    {
+    { std::cout << selectedItemIndex  << std::endl;
         menu[selectedItemIndex].setColor(sf::Color::White);
+
         selectedItemIndex--;
         menu[selectedItemIndex].setColor(sf::Color::Black);
+        std::cout << selectedItemIndex  << std::endl;
+
     }
 }
 
