@@ -2,6 +2,8 @@
 
 Menu monmenu(WIDTH, HEIGHT);
 
+int GameState =0;
+
 Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !")
 {
     window.setFramerateLimit(60);
@@ -47,6 +49,11 @@ void Game::processEvents()
                         break;
                 }
             }
+        if  ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
+            if (event.key.code == sf::Keyboard::Numpad1){
+                 GameState = 1;
+                    }
+                }
         }
 
       
@@ -54,26 +61,21 @@ void Game::processEvents()
 
 
 void Game::update()
-{
-    if  ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
-            sf::Event event;
-                        if (event.key.code == sf::Keyboard::Numpad0){
-                            sf::Texture Terrain;
-                            std::cout << "Bogogoogogogo \n";
-                            window.clear();
-                            Terrain.loadFromFile("Terrain.png");
-                            sf::Sprite spT(Terrain);
-                            window.draw(spT);
-                            }
-                        }
-        else   monmenu.draw(window);
-    
+{    
 }
 
 void Game::render()
 {
     window.clear();
- 
-    monmenu.draw(window);            
+    if (GameState == 1){
+        sf::Texture Terrain;
+        std::cout << "Bogogoogogogo \n";
+        window.clear();
+        Terrain.loadFromFile("TerrainCarte.png");
+        sf::Sprite spT(Terrain);
+        window.draw(spT);
+    }
+
+    else monmenu.draw(window);
     window.display();
 }
