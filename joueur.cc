@@ -157,12 +157,12 @@ else {
   		std::vector<std::string> liste_titres_boy;
   		std::vector<std::string> liste_titres_girl;
 		std::vector<std::string> liste_complement;
-  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Simone","Cecile","Serena"}; //8
-  		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick"}; ///8
-  		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien"}; // 8
-  		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne"}; //8
-  		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathematiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets"}; //9
-  		
+  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Cecile","Rihanna","Anida","Mina","Sophia","Paola","Ines","Isma","Suzanne","Alexia","Rama","Myriam","Fatine","Colette"}; //8
+  		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick","Onizuka","Kenshin","Hilbert","Ayman","Aurelien","Vincent","Boussad","Walid","Damso"}; ///8
+  		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien","Le Choisi","Le Seigneur","Le Dompteur","Le Prince"}; // 8
+  		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne","La Choisie","La Princesse","La Domptrice","La cheffe"}; //8
+  		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathematiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets","Des Algorithmes Recursifs","Des Ingenieurs","Des "}; //9
+
   		int i=0;
   		for (i=0;i<nbcartedebut/2;i++){ /// boucle des filles
   			int indiceprenom=rand()%liste_girl.size();
