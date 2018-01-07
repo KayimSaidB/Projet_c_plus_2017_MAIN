@@ -1,6 +1,6 @@
 #include "Joueur.hh"
-
-
+#include <cstdlib>
+#include <time.h>       /* time */
 
 Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 	_nom=nom;
@@ -41,20 +41,19 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 
 		
 	}*/
-	void Joueur::declarer_une_attaque(Terrain *terrainactuel)
+	void Joueur::declarer_une_attaque(Terrain *terrainactuel, int choix)
 	{	
-int attaque,attaquant;
+int attaque,attaquant,size;
 if (_numero_joueur==1){
 	///CAS OU joueur 1 attaque joueur 2
-		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
+		 // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 		int i = 0;
 		bool cestbon=false;
 		std::cout << "l'attaque s'enclenhce hf" << std::endl;
-
+		 size=(terrainactuel->get_carte_joueur1()).size();
 		while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon==false){
 			((terrainactuel->get_carte_joueur1())[i]).affiche();
 			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			std::cin >> choix;
 			switch (choix){
 				case 1 : {
 		    attaquant = i;
@@ -67,13 +66,13 @@ if (_numero_joueur==1){
 				}
 				
 				case 2 : {
-					i +=1;
+					i =(i+1)%size;
 					std::cout << "okaay" << std::endl;
 				break;
 						}
 				case 3 : 
 				{
-						i-=1;
+						i=(i-1)%size;
 						std::cout << "okaay" << std::endl;
 
 				break;
@@ -84,8 +83,8 @@ if (_numero_joueur==1){
 			cestbon=false; i=0;
 			while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
 			((terrainactuel->get_carte_joueur2())[i]).affiche();
+			size=(terrainactuel->get_carte_joueur2()).size();
 			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			std::cin >> choix;
 			switch (choix){
 				case 1 : {
 			attaque = i;
@@ -102,13 +101,13 @@ if (_numero_joueur==1){
 				}
 				
 				case 2 : {
-					i +=1;
+					i=(i+1)%size;
 					std::cout << "okaay" << std::endl;
 				break;
 						}
 				case 3 : 
 				{
-						i-=1;
+						i=(i-1+size)%size;
 				break;
 			}
 			}
@@ -118,15 +117,14 @@ if (_numero_joueur==1){
 else {
 	///CAS OU joueur 2 attaque joueur 1
 
-		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
+		 // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 		int i = 0;
 		bool cestbon=false;
 		std::cout << "l'attaque s'enclenhce hf" << std::endl;
-
+		size=(terrainactuel->get_carte_joueur2()).size();
 		while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
 			((terrainactuel->get_carte_joueur2())[i]).affiche();
 			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			std::cin >> choix;
 			switch (choix){
 				case 1 : {
 			 attaquant = i;
@@ -137,13 +135,13 @@ else {
 				}
 				
 				case 2 : {
-					i +=1;
+					i =(i+1)%size;
 					std::cout << "okaay" << std::endl;
 				break;
 						}
 				case 3 : 
 				{
-						i-=1;
+						i=(i-1+size)%size;
 				break;
 			}
 			}
@@ -152,6 +150,7 @@ else {
 		cestbon=false;
 			while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon ==false){
 			((terrainactuel->get_carte_joueur1())[i]).affiche();
+			size=(terrainactuel->get_carte_joueur1()).size();
 			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
 			std::cin >> choix;
 			switch (choix){
@@ -166,13 +165,13 @@ else {
 				}
 				
 				case 2 : {
-					i +=1;
+					i=(i+1)%size;
 					std::cout << "okaay" << std::endl;
 				break;
 						}
 				case 3 : 
 				{
-						i-=1;
+						i=(i-1+size)%size;
 				break;
 			}
 			}
@@ -188,10 +187,65 @@ else {
 				
 	
 	void Joueur::init_deck(){
-		_carte_deck.push_back(CarteMonstre("Tao Pai Pai evadé fiscal",10,15,16,DansDeck,Guerrier));
-		_carte_deck.push_back(CarteMonstre("Freezer evadé fiscal",50,1500,1600,DansDeck,Guerrier));
-		_carte_deck.push_back(CarteMonstre("Jiren evadé fiscal",50000,15000,16000,DansDeck,Guerrier));
-		
+		 /// maximum de pa
+		int maxpdv=300;
+		int maxatt=200;
+		int maxpa=(maxpdv+maxatt)/10;
+		int nbcartedebut=10;
+		int equilibrage=((maxpdv+maxatt)/2)*nbcartedebut;
+		//_carte_deck.push_back(CarteMonstre("Tao Pai Pai evadé fiscal",10,15,16,DansDeck,Guerrier));
+		//_carte_deck.push_back(CarteMonstre("Freezer evadé fiscal",50,1500,1600,DansDeck,Guerrier));
+		//_carte_deck.push_back(CarteMonstre("Jiren evadé fiscal",50000,15000,16000,DansDeck,Guerrier));
+		srand(time(NULL));
+  		std::vector<std::string> liste_boy;
+  		std::vector<std::string> liste_girl;
+  		std::vector<std::string> liste_titres_boy;
+  		std::vector<std::string> liste_titres_girl;
+		std::vector<std::string> liste_complement;
+  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Simone","Elizabeth","Serena"}; //8
+  		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick"}; ///8
+  		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien"}; // 8
+  		liste_titres_girl={"La pourfendrice","La Deesse","L'impératrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne"}; //8
+  		liste_complement={"Des ténébres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathématiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets"}; //9
+  		
+  		int i=0;
+  		for (i=0;i<nbcartedebut/2;i++){ /// boucle des filles
+  			int indiceprenom=rand()%liste_girl.size();
+  			int indicetitres=rand()%liste_titres_girl.size();
+  			int indicecompl=rand()%liste_complement.size();
+  			std::string lenom;
+  			lenom=liste_girl[indiceprenom]+" "+ liste_titres_girl[indicetitres]+" "+liste_complement[indicecompl];
+  			int nbatt=rand()%maxatt;
+  			int nbpdv=rand()%maxpdv;
+  			do{
+  				 nbatt=rand()%maxatt;
+  				 nbpdv=rand()%maxpdv;
+  				}
+  			while (equilibrage<nbatt+nbpdv);
+  		    equilibrage=equilibrage-nbatt-nbpdv;
+  			int nb_pa=(nbatt+nbpdv)/10;
+			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv,DansDeck,Guerrier));
+
+  		}
+  		for (i=0;i<nbcartedebut/2;i++){ /// boucle des filles
+  			int indiceprenom=rand()%liste_boy.size();
+  			int indicetitres=rand()%liste_titres_boy.size();
+  			int indicecompl=rand()%liste_complement.size();
+  			std::string lenom;
+  			lenom=liste_boy[indiceprenom]+" "+ liste_titres_boy[indicetitres]+" "+liste_complement[indicecompl];
+  			int nbatt=rand()%maxatt;
+  			int nbpdv=rand()%maxpdv;
+  			do{
+  				 nbatt=rand()%maxatt;
+  				 nbpdv=rand()%maxpdv;
+  				}
+  			while (equilibrage<nbatt+nbpdv);
+  		    equilibrage=equilibrage-nbatt-nbpdv;
+  			int nb_pa=(nbatt+nbpdv)/10;
+			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv,DansDeck,Guerrier));
+
+  		}
+
 	}
 void Joueur::init_deck2(){
 		_carte_deck.push_back(CarteMonstre("Goku petit evadé fiscal",10,15,16,DansDeck,Guerrier));
@@ -201,52 +255,34 @@ void Joueur::init_deck2(){
 	}
 
 
-	void Joueur::choisir_carte_dans_main_et_poser(Terrain *terrainactuel){
-			
-		int choix = 0; // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
-		int i = 0;
-		int sizecart = get_Nb_carte_main();
-		while(choix == 0 || i <= _carte_main.size()){
-			_carte_main[i%sizecart].affiche();
-			
-			std::cout << "Voulez cette carte ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precdent" <<"\n" ;
-			std::cin >> choix;
-			
-			switch (choix){
-				case 1 : {
-			CarteMonstre kayim = _carte_main[i];
-			std::cout << _pts_action <<std::endl;
+	bool Joueur::choisir_carte_dans_main_et_poser(Terrain *terrainactuel,int choix){
+			int sizecart=_carte_main.size();
+			std::cout <<"sizecart"<< std::endl;
+			std::cout << sizecart << std::endl;
 
+		 // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
+
+			
+		
+			CarteMonstre kayim = _carte_main[choix];
 			if(kayim.get_point_action() > _pts_action){
 			std::cout <<"Impossible de poser cette carte"<<std::endl;
 			std::cout <<" Plus assez de point d'action" << std::endl;
-			break;
+			return false;
 				}
 				
 			else{
+			std::cout << "kk" << std::endl;
 			_pts_action =_pts_action- kayim.get_point_action();
 			terrainactuel->push_that_card( kayim,_numero_joueur);
-			std::cout <<" work" << std::endl;
+			std::cout << "kk" << std::endl;
+			std::cout << choix << std::endl;
+			std::cout << sizecart << std::endl;
 
-			_carte_main.erase(_carte_main.begin()+(i%sizecart));
-			return;
-			break;
-
-
-					}
-					} 
-				case 2 : {
-					i +=1;
-					std::cout << "okaay" << std::endl;
-				break;
-						}
-				case 3 : 
-				{
-						i-=1;
-						std::cout << "okaay" << std::endl;
-				break;
-			}
-			}
+			_carte_main.erase(_carte_main.begin()+(choix%sizecart));
+			return true;
+			
+			
 		}
 		//return _carte_main[1];
 		}

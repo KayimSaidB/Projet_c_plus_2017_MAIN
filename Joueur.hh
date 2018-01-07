@@ -23,11 +23,12 @@ public:
 	std::string get_nom();
 	void pioche_une_carte();
 	//void pose_une_carte(Terrain terrainactuel);
-	void declarer_une_attaque(Terrain *actuel);
-	void choisir_carte_dans_main_et_poser(Terrain *terrainactuel);
+	void declarer_une_attaque(Terrain *actuel,int choix);
+	bool choisir_carte_dans_main_et_poser(Terrain *terrainactuel, int choix);
 	void init_deck();
 	void init_deck2();
 	void init_main();
+	std::vector<CarteMonstre> get_main(){return _carte_main;};
 
 
 };
