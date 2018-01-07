@@ -198,7 +198,7 @@ if (GameState==4){
             GameState=3;
             h=3;
         }
-        else {h=2;}
+        else {h=8;}
 
 GameState=3;
 

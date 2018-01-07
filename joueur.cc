@@ -29,118 +29,6 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 
 
 	}
-	
-	/*void Joueur::pose_une_carte(Terrain terrainactuel){
-		
-		int nbrcarte = get_Nb_carte_main();
-		
-		choix:
-		CarteMonstre kayim = choisir_carte_dans_main();
-		
-		if (nbrcarte==0)
-			std::cout << "Vous n'avez plus de carte. Piochez en une !" <<std::endl ;
-			return;
-			
-
-		
-	}*/
-/*	void Joueur::declarer_une_attaque(Terrain *terrainactuel, int attaquant,int attaque)
-	{	
-int attaque,attaquant,size;
-if (_numer
-
-			terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
-
-			break;
-			break;
-				}
-				
-				case 2 : {
-					i=(i+1)%size;
-					std::cout << "okaay" << std::endl;
-				break;
-						}
-				case 3 : 
-				{
-						i=(i-1+size)%size;
-				break;
-			}
-			}
-}
-
-}
-else {
-	///CAS OU joueur 2 attaque joueur 1
-
-		 // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
-		int i = 0;
-		bool cestbon=false;
-		std::cout << "l'attaque s'enclenhce hf" << std::endl;
-		size=(terrainactuel->get_carte_joueur2()).size();
-		while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
-			((terrainactuel->get_carte_joueur2())[i]).affiche();
-			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			switch (choix){
-				case 1 : {
-			 attaquant = i;
-	 		 	std::cout << attaquant << std::endl;
-			cestbon=true;
-			break;
-			break;
-				}
-				
-				case 2 : {
-					i =(i+1)%size;
-					std::cout << "okaay" << std::endl;
-				break;
-						}
-				case 3 : 
-				{
-						i=(i-1+size)%size;
-				break;
-			}
-			}
-
-		}
-		cestbon=false;
-			while(choix == 0 || i <= (terrainactuel->get_carte_joueur1(_numero_joueur)).size() && cestbon ==false){
-			((terrainactuel->get_carte_joueur1(_numero_joueur))[i]).affiche();
-			size=(terrainactuel->get_carte_joueur1(_numero_joueur)).size();
-			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			std::cin >> choix;
-			switch (choix){
-				case 1 : {
-			 attaque = i;
-
-			cestbon=true;
-			terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
-
-			break;
-			break;
-				}
-				
-				case 2 : {
-					i=(i+1)%size;
-					std::cout << "okaay" << std::endl;
-				break;
-						}
-				case 3 : 
-				{
-						i=(i-1+size)%size;
-				break;
-			}
-			}
-}
-//terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
-
-}
-
-
-}
-*/
-
-				
-	
 	void Joueur::init_deck(){
 		 /// maximum de pa
 		int maxpdv=300;
@@ -148,16 +36,13 @@ else {
 		int maxpa=(maxpdv+maxatt)/10;
 		int nbcartedebut=10;
 		int equilibrage=((maxpdv+maxatt)/2)*nbcartedebut;
-		//_carte_deck.push_back(CarteMonstre("Tao Pai Pai evadé fiscal",10,15,16,DansDeck,Guerrier));
-		//_carte_deck.push_back(CarteMonstre("Freezer evadé fiscal",50,1500,1600,DansDeck,Guerrier));
-		//_carte_deck.push_back(CarteMonstre("Jiren evadé fiscal",50000,15000,16000,DansDeck,Guerrier));
 		srand(time(NULL));
   		std::vector<std::string> liste_boy;
   		std::vector<std::string> liste_girl;
   		std::vector<std::string> liste_titres_boy;
   		std::vector<std::string> liste_titres_girl;
 		std::vector<std::string> liste_complement;
-  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Cecile","Rihanna","Anida","Mina","Sophia","Paola","Ines","Isma","Suzanne","Alexia","Rama","Myriam","Fatine","Colette"}; //8
+  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Cecile","Rihanna","Anida","Mina","Sophia","Paola","Claire","Ines","Isma","Suzanne","Alexia","Rama","Myriam","Fatine","Colette"}; //8
   		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick","Onizuka","Kenshin","Hilbert","Ayman","Aurelien","Vincent","Boussad","Walid","Damso"}; ///8
   		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien","Le Choisi","Le Seigneur","Le Dompteur","Le Prince"}; // 8
   		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne","La Choisie","La Princesse","La Domptrice","La cheffe"}; //8
@@ -182,7 +67,7 @@ else {
 			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv,DansDeck,Guerrier));
 
   		}
-  		for (i=0;i<nbcartedebut/2;i++){ /// boucle des filles
+  		for (i=0;i<nbcartedebut/2;i++){ /// boucle des garcons
   			int indiceprenom=rand()%liste_boy.size();
   			int indicetitres=rand()%liste_titres_boy.size();
   			int indicecompl=rand()%liste_complement.size();
@@ -201,12 +86,6 @@ else {
 
   		}
 
-	}
-void Joueur::init_deck2(){
-		_carte_deck.push_back(CarteMonstre("Goku petit evadé fiscal",10,15,16,DansDeck,Guerrier));
-		_carte_deck.push_back(CarteMonstre("Goku Ssj 1 evadé fiscal",50,1500,1600,DansDeck,Guerrier));
-		_carte_deck.push_back(CarteMonstre("Goku Ultra Instinct evadé fiscal",50000,15000,16000,DansDeck,Guerrier));
-		
 	}
 
 

@@ -8,7 +8,7 @@ Menu::Menu(double width, double height)
     }
 
  
-    fond.loadFromFile("yugi.png");
+    fond.loadFromFile("yugitkt.png");
 
 
 
