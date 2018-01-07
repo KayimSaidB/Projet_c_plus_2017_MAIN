@@ -20,9 +20,12 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 	
 	
 	void Joueur::pioche_une_carte(){
-		CarteMonstre macarte=_carte_deck.back();
-		_carte_deck.pop_back();
+		srand(time(NULL));
+		int sizecart=_carte_deck.size();
+		int j=rand()%sizecart;
+		CarteMonstre macarte=_carte_deck[j];
 		_carte_main.push_back(macarte); 
+		_carte_deck.erase(_carte_deck.begin()+j);
 
 
 	}
@@ -202,11 +205,11 @@ else {
   		std::vector<std::string> liste_titres_boy;
   		std::vector<std::string> liste_titres_girl;
 		std::vector<std::string> liste_complement;
-  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Simone","Elizabeth","Serena"}; //8
+  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Simone","Cecile","Serena"}; //8
   		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick"}; ///8
   		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien"}; // 8
-  		liste_titres_girl={"La pourfendrice","La Deesse","L'impératrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne"}; //8
-  		liste_complement={"Des ténébres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathématiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets"}; //9
+  		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne"}; //8
+  		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathématiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets"}; //9
   		
   		int i=0;
   		for (i=0;i<nbcartedebut/2;i++){ /// boucle des filles
@@ -272,10 +275,8 @@ void Joueur::init_deck2(){
 				}
 				
 			else{
-			std::cout << "kk" << std::endl;
 			_pts_action =_pts_action- kayim.get_point_action();
 			terrainactuel->push_that_card( kayim,_numero_joueur);
-			std::cout << "kk" << std::endl;
 			std::cout << choix << std::endl;
 			std::cout << sizecart << std::endl;
 
