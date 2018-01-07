@@ -9,8 +9,7 @@ Menu::Menu(double width, double height)
 
  
     fond.loadFromFile("yugi.png");
-    sf::Text text("Choix avec ESAPCE", font, 13);
-    text.setPosition(10,250);
+
 
 
     menu[0].setFont(font);
@@ -29,6 +28,10 @@ void Menu::draw(sf::RenderWindow &window)
 {	
     sf::Sprite spf(fond);
 	window.draw(spf);
+
+     sf::Text text("Choix avec ESAPCE", font, 13);
+    text.setPosition(10,250);
+    window.draw(text);
     for (int i = 0; i < MAX_NUMBER_OF_ITMES; i++)
     {
         window.draw(menu[i]);
