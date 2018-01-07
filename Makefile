@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic -g -lsfml-graphics -lsfml-window -lsfml-system -std=c++11
-LDFLAGS= -lsfml-graphics -lsfml-window -lsfml-system -std=c++11
+CFLAGS=-W -Wall -ansi -pedantic -g -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -std=c++1
+LDFLAGS= -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -std=c++11
 EXEC=sfml-app
 SRC= terrain.cc joueur.cc CarteMonstre.cc Game.cc Menu.cc Jeu.cc 
 OBJ= $(SRC:.c=.o)

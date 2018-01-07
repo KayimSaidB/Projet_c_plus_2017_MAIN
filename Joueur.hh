@@ -28,9 +28,10 @@ public:
 	void init_deck();
 	void init_deck2();
 	void init_main();
+	void init_pa();
 	std::vector<CarteMonstre> get_main(){return _carte_main;};
-
-
+	int get_num(){return _numero_joueur;};
+	void set_pdv(int newpdv){_pointdevie=newpdv;}
 };
 
 #endif

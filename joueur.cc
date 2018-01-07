@@ -11,7 +11,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 	
 	int Joueur::get_point_action(){return _pts_action;}
 
-
+	void Joueur::init_pa(){_pts_action=50;}
 	int Joueur::get_Nb_carte_main(){return _carte_main.size();}
 	int Joueur::get_Nb_carte_deck(){return _carte_deck.size();}
 	int Joueur::get_pointdevie(){return _pointdevie;}
@@ -44,58 +44,10 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 
 		
 	}*/
-	void Joueur::declarer_une_attaque(Terrain *terrainactuel, int choix)
+/*	void Joueur::declarer_une_attaque(Terrain *terrainactuel, int attaquant,int attaque)
 	{	
 int attaque,attaquant,size;
-if (_numero_joueur==1){
-	///CAS OU joueur 1 attaque joueur 2
-		 // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
-		int i = 0;
-		bool cestbon=false;
-		std::cout << "l'attaque s'enclenhce hf" << std::endl;
-		 size=(terrainactuel->get_carte_joueur1()).size();
-		while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon==false){
-			((terrainactuel->get_carte_joueur1())[i]).affiche();
-			std::cout << "Avec quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			switch (choix){
-				case 1 : {
-		    attaquant = i;
-			std::cout << "l'attaque s'enclenhce attaquant" << std::endl;
-	 		 	
-	 		 	std::cout << attaquant << std::endl;
-			cestbon=true;
-			break;
-			
-				}
-				
-				case 2 : {
-					i =(i+1)%size;
-					std::cout << "okaay" << std::endl;
-				break;
-						}
-				case 3 : 
-				{
-						i=(i-1)%size;
-						std::cout << "okaay" << std::endl;
-
-				break;
-			}
-			}
-
-		}
-			cestbon=false; i=0;
-			while(choix == 0 || i <= (terrainactuel->get_carte_joueur2()).size() && cestbon==false){
-			((terrainactuel->get_carte_joueur2())[i]).affiche();
-			size=(terrainactuel->get_carte_joueur2()).size();
-			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
-			switch (choix){
-				case 1 : {
-			attaque = i;
-			cestbon=true;
-			std::cout << "l'attaque s'enclenhce tkt" << std::endl;
-			std::cout << attaquant << std::endl;
-			std::cout << attaque<< std::endl;
-			std::cout << "l'attaque s'enclenhce tkt" << std::endl;
+if (_numer
 
 			terrainactuel->attack_enclenche(attaquant,attaque,_numero_joueur);
 
@@ -151,9 +103,9 @@ else {
 
 		}
 		cestbon=false;
-			while(choix == 0 || i <= (terrainactuel->get_carte_joueur1()).size() && cestbon ==false){
-			((terrainactuel->get_carte_joueur1())[i]).affiche();
-			size=(terrainactuel->get_carte_joueur1()).size();
+			while(choix == 0 || i <= (terrainactuel->get_carte_joueur1(_numero_joueur)).size() && cestbon ==false){
+			((terrainactuel->get_carte_joueur1(_numero_joueur))[i]).affiche();
+			size=(terrainactuel->get_carte_joueur1(_numero_joueur)).size();
 			std::cout << "Quelle carte souhaitez vous attaquer ?" << "\n" << "1 - Oui "<< "\n"<< "\n"<< "2- Suivant"<< "\n"<< "3- Precedent" <<"\n" ;
 			std::cin >> choix;
 			switch (choix){
@@ -185,7 +137,7 @@ else {
 
 
 }
-
+*/
 
 				
 	
@@ -209,7 +161,7 @@ else {
   		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick"}; ///8
   		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien"}; // 8
   		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne"}; //8
-  		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathématiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets"}; //9
+  		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathematiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets"}; //9
   		
   		int i=0;
   		for (i=0;i<nbcartedebut/2;i++){ /// boucle des filles
