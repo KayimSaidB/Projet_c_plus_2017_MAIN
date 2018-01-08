@@ -303,7 +303,7 @@ void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
     text.setPosition(250,280);
     window.draw(text);
     sf::Texture curseur;
-    curseur.loadFromFile("79532.png");
+    curseur.loadFromFile("79532.jpg");
     sf::Sprite spritecurseur(curseur);
     spritecurseur.scale(sf::Vector2f(0.15f, 0.15f));
   	spritecurseur.setPosition(sf::Vector2f(450-indicecarteivo*100,485));
