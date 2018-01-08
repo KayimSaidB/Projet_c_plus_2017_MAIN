@@ -13,6 +13,7 @@ int indicecarteivo;
 int indicecarteattaquant=0;
 int indicecarteattaque=0;
 bool whoseturn=true;
+int countturn=0;
 Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !")
 {
     window.setFramerateLimit(60);
@@ -27,7 +28,7 @@ void Game::run()
   Terrain unbeauterrain(0,0); 
  sf::Music music;
 music.openFromFile("musique.ogg");
-     // erreur
+
 music.play();
 music.setLoop(true);
 music.setVolume(50);
@@ -87,12 +88,11 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
 
                     case sf::Keyboard::Right:
                         indicecarteivo=(indicecarteivo+1+joueur1->get_Nb_carte_main())%joueur1->get_Nb_carte_main();
-                    std::cout <<"on repete les" <<std::endl;
+
                         break;
                     case sf::Keyboard::Left:
                         indicecarteivo=(indicecarteivo-1+joueur1->get_Nb_carte_main())%joueur1->get_Nb_carte_main();
-                                            std::cout <<"on repete les" <<std::endl;
-
+                                            
                         break;
                     
                     case sf::Keyboard::P:
@@ -100,7 +100,7 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                     joueur1->init_pa();
                     unbeauterrain->attack_reinit(joueur1->get_num());
                      joueur2->pioche_une_carte();
-
+                     countturn++;
                     break;
 
                     case sf::Keyboard::B:
@@ -173,10 +173,7 @@ void Game::update(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
       
 
 if (GameState == 1 && h==4){
-    std::cout << "image de soi meme" <<std::endl;
-        std::cout << GameState <<std::endl;
-    std::cout << "image de soi meme" <<std::endl;
-
+    
 
     
     joueur1->pioche_une_carte();
@@ -190,10 +187,10 @@ if (GameState == 1 && h==4){
 
 }
 if (GameState==4){
-    std::cout << "lourd bail" << std::endl;
-    std::cout << joueur1->get_Nb_carte_main() << std::endl;
 
-        if (joueur1->choisir_carte_dans_main_et_poser(unbeauterrain,indicecarteivo)==false){
+
+
+ if (joueur1->choisir_carte_dans_main_et_poser(unbeauterrain,indicecarteivo)==false){
 
             GameState=3;
             h=3;
@@ -313,7 +310,7 @@ void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
     window.draw(text);
     }
     if (h==4){
-    std::string textlourd= "Votre Monstre a déja attaqué, cessez cette gourmandise";
+    std::string textlourd= "Votre Monstre a déja attaque, cessez cette gourmandise";
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
     text.setPosition(230,455);
@@ -331,7 +328,7 @@ void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
 
     }
 }
-if (GameState==5){
+if ((GameState==5) && countturn>0){
 
     std::string textlourd= unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()].affichage();
     sf::Text text(textlourd, font, 13);
@@ -345,7 +342,7 @@ if (GameState==5){
     window.draw(text2);
 
 }
-if (GameState==6){
+if (GameState==6 && unbeauterrain->get_carte_joueur1(joueur2->get_num()).size() >0){
     std::string textlourd= unbeauterrain->get_carte_joueur1(joueur2->get_num())[indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
@@ -358,6 +355,22 @@ if (GameState==6){
     window.draw(text2);
 
 }
+  if ((GameState==6) && (unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()==0)){
+
+  	GameState=8;
+  }
+  if((GameState==5) && countturn==0){
+  	
+  	std::string textlourd2= "On attaque pas dès le premier tour voyons !";
+    sf::Text text2(textlourd2, font, 13);
+    text2.setColor(sf::Color(0,0,0));
+    text2.setPosition(230,455);
+    window.draw(text2);
+     std::this_thread::sleep_for(std::chrono::seconds(1)); 
+
+    GameState=3;
+  }
+
     std::string pa=std::to_string(joueur1->get_point_action());
     sf::Text textpa(pa, font, 20);
     textpa.setColor(sf::Color(0,0,0));
