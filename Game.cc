@@ -302,6 +302,11 @@ void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
     text.setColor(sf::Color(0,0,0));
     text.setPosition(250,280);
     window.draw(text);
+    sf::Texture curseur;
+    curseur.loadFromFile("79532.png");
+    sf::Sprite spritecurseur(curseur);
+    spritecurseur.scale(sf::Vector2f(0.15f, 0.15f));
+  	spritecurseur.setPosition(sf::Vector2f(450-indicecarteivo*100,485));
     if (h==3){
     std::string textlourd= "Pas assez de point d'action ! N'avez vous donc pas honte ?";
     sf::Text text(textlourd, font, 13);
