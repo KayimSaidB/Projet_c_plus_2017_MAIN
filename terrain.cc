@@ -79,15 +79,18 @@
 	 void Terrain::attack_reinit(int indice){
 	 		if (indice==1){
 	 			int i;
-	 			for (i=0;i<_carte_joueur1.size();i++)
+	 			for (i=0;i<_carte_joueur1.size();i++){
 	 			already_attack1[i]=false;
+	 		std::cout << "faut qu'on se serre les coude" << std::endl;
+	 	}
 
 	 		}
 	 		else 	{
 	 			int i;
-	 			for (i=0;i<_carte_joueur1.size();i++)
+	 			for (i=0;i<_carte_joueur2.size();i++){
 	 			already_attack2[i]=false;
-
+	 			std::cout << "faut qu'on se serre les coude" << std::endl;
+	 		}
 	 	}
 
 

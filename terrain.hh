@@ -26,7 +26,7 @@ public:
 	void push_that_card( CarteMonstre macarte, int numerojoueur);
 	void attack_reinit(int indice);
 	void set_already_attack(int indicejoueur,int indicecarte){if (indicejoueur==1) already_attack1[indicecarte]=true;
-	else already_attack2[indicecarte]=false; }
+	else already_attack2[indicecarte]=true; }
 
 	void afficher_terrain ();
 	~Terrain(){};

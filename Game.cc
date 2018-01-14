@@ -26,6 +26,9 @@ void Game::run()
   Joueur untypebien(50,700,"Mohamed",1);
   Joueur unsecondtypebien(50,700,"Harold",2);
   Terrain unbeauterrain(0,0); 
+  unbeauterrain.attack_reinit(1);
+  unbeauterrain.attack_reinit(2);
+
  sf::Music music;
 music.openFromFile("musique.ogg");
 
@@ -100,6 +103,8 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                     whoseturn=not whoseturn;
                     joueur1->init_pa();
                     unbeauterrain->attack_reinit(joueur1->get_num());
+                   unbeauterrain->attack_reinit(joueur2->get_num());
+
                      if (joueur2->get_Nb_carte_main()<5)joueur2->pioche_une_carte();
                      countturn++;
                     break;
@@ -202,10 +207,10 @@ if (unbeauterrain->attack_enclenche(indicecarteattaquant,indicecarteattaque,joue
 if (GameState==8){
      GameState=3;
 
-if (unbeauterrain->already_attack_fun(joueur1->get_num(),indicecarteattaque)==false){
+if (unbeauterrain->already_attack_fun(joueur1->get_num(),indicecarteattaquant)==false){
         joueur2->set_pdv(joueur2->get_pointdevie()-unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaque].get_pts_atk());
 
-        unbeauterrain->set_already_attack( joueur1->get_num(),indicecarteattaque);
+        unbeauterrain->set_already_attack( joueur1->get_num(),indicecarteattaquant);
     
     }
 else {
@@ -289,6 +294,8 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
      sf::Texture carteterrain;
     carteterrain.loadFromFile("evasion_invoque.png");
     int i;
+    sf::Texture swordT;
+    swordT.loadFromFile("sword.png");
  for (i=0;i<unbeauterrain->get_carte_joueur1(joueur1->get_num()).size();i++){
         sf::Sprite cartetemp(carteterrain);
         cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
@@ -297,15 +304,15 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
         int bleu=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_point_action();
         cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
-      if(unbeauterrain->already_attack_fun(joueur1->get_num(),i)==true){
-        sf::Texture swordT;
-        swordT.loadFromFile("sword.png");
-        sf::Sprite sword(swordT);
-        sword.scale(sf::Vector2f(0.05f, 0.05f));
-        sword.setPosition(sf::Vector2f(110+i*100,345))
+       window.draw(cartetemp);
+    if(unbeauterrain->already_attack_fun(joueur1->get_num(),i)==true){
+            sf::Sprite sword(swordT);
+            sword.scale(sf::Vector2f(0.05f, 0.05f));
+            sword.setPosition(sf::Vector2f(110+i*100,345));
+            window.draw(sword);
+
       }
-        window.draw(cartetemp);
-        window.draw(sword);
+        
         }
           for (i=0;i<unbeauterrain->get_carte_joueur1(joueur2->get_num()).size();i++){
         sf::Sprite cartetemp(carteterrain);
@@ -351,7 +358,7 @@ void Game::main_phase(Joueur* joueur1){
     text.setColor(sf::Color(0,0,0));
     text.setPosition(230,455);
     window.draw(text);
-
+h=8;
 }
   
     else {
