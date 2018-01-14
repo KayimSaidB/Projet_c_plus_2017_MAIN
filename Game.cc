@@ -170,11 +170,7 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
 
 void Game::update(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
 { 
-      
-
-if (GameState == 1 && h==4){
-    
-
+    if (GameState == 1 && h==4){
     int c;
     for (c=0;c<3;c++){
     joueur1->pioche_une_carte();
@@ -301,7 +297,15 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
         int bleu=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_point_action();
         cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
+      if(unbeauterrain->already_attack_fun(joueur1->get_num(),i)==true){
+        sf::Texture swordT;
+        swordT.loadFromFile("sword.png");
+        sf::Sprite sword(swordT);
+        sword.scale(sf::Vector2f(0.05f, 0.05f));
+        sword.setPosition(sf::Vector2f(110+i*100,345))
+      }
         window.draw(cartetemp);
+        window.draw(sword);
         }
           for (i=0;i<unbeauterrain->get_carte_joueur1(joueur2->get_num()).size();i++){
         sf::Sprite cartetemp(carteterrain);
