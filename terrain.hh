@@ -29,6 +29,8 @@ public:
 	else already_attack2[indicecarte]=false; }
 
 	void afficher_terrain ();
+	~Terrain(){};
+
 };
 
 #endif

@@ -16,6 +16,7 @@ std::vector<CarteMonstre> _carte_deck;
 int _numero_joueur;
 public:
 	Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur);
+    ~Joueur(){};
 	int get_point_action();
 	int get_Nb_carte_main();
 	int get_Nb_carte_deck();

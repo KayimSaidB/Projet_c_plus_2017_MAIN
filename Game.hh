@@ -13,13 +13,19 @@ class Game
 public:
     Game();
     void run();
+    ~Game(){};
 
 private:
     void processEvents(Joueur* joueur1,Joueur * joueur2,Terrain *unbeauterrain);
     void update(Joueur* joueur1,Joueur * joueur2,Terrain *unbeauterrain);
     void render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain);
-
+    void afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2);
+    void afficher_carte_main(Joueur *joueur1,Joueur *joueur2);
     sf::RenderWindow window;
+    void afficher_terrain_rempli(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain);
+    void main_phase(Joueur* joueur1);
+    void choix_attaquant(Joueur *joueur1,Terrain *unbeauterrain);
+    void choix_attaque(Joueur *joueur2,Terrain *unbeauterrain);
 };
 
 #endif

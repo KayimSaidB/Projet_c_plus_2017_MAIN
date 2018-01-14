@@ -43,7 +43,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
   		std::vector<std::string> liste_titres_girl;
 		std::vector<std::string> liste_complement;
   		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Cecile","Rihanna","Anida","Mina","Sophia","Paola","Claire","Ines","Isma","Suzanne","Alexia","Rama","Myriam","Fatine","Colette","Mahshid"}; //8
-  		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick","Onizuka","Kenshin","Hilbert","Ayman","Aurelien","Vincent","Boussad","Walid","Damso","Tarik","Stef","Mr Pecheux"}; ///8
+  		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick","Onizuka","Jean-Louis","Kenshin","Hilbert","Ayman","Aurelien","Vincent","Boussad","Walid","Damso","Tarik","Stef","Mr Pecheux","Taha","Nico"}; ///8
   		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien","Le Choisi","Le Seigneur","Le Dompteur","Le Prince"}; // 8
   		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne","La Choisie","La Princesse","La Domptrice","La Sorciere"}; //8
   		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathematiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets","Des Algorithmes Recursifs","Des Ingenieurs","Des Compilateurs","Des banquiers","Des Evades Fiscaux en Suisse","Des Pratiquants de Musculation intensive","Des schemas de Ponzi"}; //9

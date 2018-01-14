@@ -21,6 +21,8 @@ public:
 	std::string get_nom();
 	void affiche() const;
 	CarteMonstre(std::string nom,int pts_action,int pts_atk,int _pdv,Etat _mon_etat,Attribut _mon_attribut);
+   ~CarteMonstre(){};
+
 	std::string affichage()const {
 
 		return _nom+ "\n\n\nPoint de vie : " +std::to_string(_pdv)+" Point d' action : "+std::to_string(_pts_action)+ " Point d'attaque :" +std::to_string(_pts_atk);

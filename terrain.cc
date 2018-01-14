@@ -1,6 +1,5 @@
 #include "terrain.hh"
 
-	int ikfe;
 	int Terrain::get_nbrtour(){return _nbtour;}
 	int Terrain::get_tempstour(){return _temps;}
 	std::vector<CarteMonstre> Terrain::get_carte_joueur1(int indice){if (indice==1) return _carte_joueur1;
