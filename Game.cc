@@ -14,6 +14,7 @@ int indicecarteattaquant=0;
 int indicecarteattaque=0;
 bool whoseturn=true;
 int countturn=0;
+int indiceperdant;
 Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !")
 {
     window.setFramerateLimit(100);
@@ -23,15 +24,15 @@ Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !"
 void Game::run()
 
 {   
-  Joueur untypebien(50,700,"Mohamed",1);
-  Joueur unsecondtypebien(50,700,"Harold",2);
+  Joueur untypebien(50,10,"Mohamed",1);
+  Joueur unsecondtypebien(50,10,"Harold",2);
   Terrain unbeauterrain(0,0); 
   unbeauterrain.attack_reinit(1);
   unbeauterrain.attack_reinit(2);
 
- sf::Music music;
+ sf::Music music,music2;
 music.openFromFile("musique.ogg");
-
+music2.openFromFile("tkt2.ogg");
 music.play();
 music.setLoop(true);
 music.setVolume(50);
@@ -41,7 +42,18 @@ music.setVolume(50);
    unsecondtypebien.init_deck();
 
     while (window.isOpen())
-    {   
+    {   if (untypebien.get_pointdevie()<=0){
+        GameState=9;
+        indiceperdant=2;
+         music.stop();
+         
+    }
+        if (unsecondtypebien.get_pointdevie()<=0) {
+            GameState=9;
+            indiceperdant=1;
+            music.stop();
+        
+        }
         if (whoseturn==true){
         processEvents(&unsecondtypebien,&untypebien,&unbeauterrain);
         update(&unsecondtypebien,&untypebien,&unbeauterrain);
@@ -208,7 +220,7 @@ if (GameState==8){
      GameState=3;
 
 if (unbeauterrain->already_attack_fun(joueur1->get_num(),indicecarteattaquant)==false){
-        joueur2->set_pdv(joueur2->get_pointdevie()-unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaque].get_pts_atk());
+        joueur2->set_pdv(joueur2->get_pointdevie()-unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaquant].get_pts_atk());
 
         unbeauterrain->set_already_attack( joueur1->get_num(),indicecarteattaquant);
     
@@ -221,9 +233,59 @@ else {
 }
 
 }
-void Game::afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2){
-       sf::Font font;
+void Game::afficher_Victoire(int indice){
+        sf::Font font;
         font.loadFromFile("belwe.ttf");
+        sf::Texture Victoire;
+        window.clear();
+        Victoire.loadFromFile("yugitkt.png");
+        sf::Sprite spriteV(Victoire);
+        window.draw(spriteV);
+        std::string textlourd= "Victoire du joueur" + std::to_string(indice);
+        sf::Text text(textlourd, font, 54);
+        text.setColor(sf::Color(0,0,0));
+        text.setPosition(200,300);
+        window.draw(text);
+
+
+}
+void Game::afficher_cara_joueur(Joueur *joueur1,Joueur *joueur2){
+    sf::Font font;
+    font.loadFromFile("belwe.ttf");
+    std::string pa=std::to_string(joueur1->get_point_action());
+    sf::Text textpa(pa, font, 20);
+    textpa.setColor(sf::Color(0,0,0));
+    textpa.setPosition(100,535);
+    window.draw(textpa);
+    std::string pdv=std::to_string(joueur1->get_pointdevie());
+    sf::Text textpdv(pdv, font, 20);
+    textpdv.setColor(sf::Color(0,0,0));
+    textpdv.setPosition(100,490);
+    window.draw(textpdv);
+    std::string num="Joueur "+std::to_string(joueur1->get_num());
+    sf::Text textnum(num, font, 20);
+    textnum.setColor(sf::Color(0,0,0));
+    textnum.setPosition(100,450);
+    window.draw(textnum);
+     std::string pa2=std::to_string(joueur2->get_point_action());
+    sf::Text textpa2(pa2, font, 20);
+    textpa2.setColor(sf::Color(0,0,0));
+    textpa2.setPosition(715,100);
+    window.draw(textpa2);
+    std::string pdv2=std::to_string(joueur2->get_pointdevie());
+    sf::Text textpdv2(pdv2, font, 20);
+    textpdv2.setColor(sf::Color(0,0,0));
+    textpdv2.setPosition(715,55);
+    window.draw(textpdv2);
+     std::string num2="Joueur "+std::to_string(joueur2->get_num());
+    sf::Text textnum2(num2, font, 20);
+    textnum2.setColor(sf::Color(0,0,0));
+    textnum2.setPosition(700,25);
+    window.draw(textnum2);
+
+}
+void Game::afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2){
+     
         sf::Texture Terrain;
         window.clear();
         Terrain.loadFromFile("TerrainCarte.png");
@@ -240,26 +302,7 @@ void Game::afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2){
         spritepioche2.setRotation(180);
         window.draw(spritepioche);
         window.draw(spritepioche2);
-    std::string pa=std::to_string(joueur1->get_point_action());
-    sf::Text textpa(pa, font, 20);
-    textpa.setColor(sf::Color(0,0,0));
-    textpa.setPosition(100,535);
-    window.draw(textpa);
-    std::string pdv=std::to_string(joueur1->get_pointdevie());
-    sf::Text textpdv(pdv, font, 20);
-    textpdv.setColor(sf::Color(0,0,0));
-    textpdv.setPosition(100,490);
-    window.draw(textpdv);
-     std::string pa2=std::to_string(joueur2->get_point_action());
-    sf::Text textpa2(pa2, font, 20);
-    textpa2.setColor(sf::Color(0,0,0));
-    textpa2.setPosition(715,100);
-    window.draw(textpa2);
-    std::string pdv2=std::to_string(joueur2->get_pointdevie());
-    sf::Text textpdv2(pdv2, font, 20);
-    textpdv2.setColor(sf::Color(0,0,0));
-    textpdv2.setPosition(715,55);
-    window.draw(textpdv2);
+        afficher_cara_joueur(joueur1,joueur2);
    
         
 }
@@ -456,6 +499,10 @@ if (GameState==6 && unbeauterrain->get_carte_joueur1(joueur2->get_num()).size() 
         window.close();
         
         }
+    if (GameState==9){
+        afficher_Victoire(indiceperdant);
+
+    }
     else monmenu.draw(window); 
 }
 

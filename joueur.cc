@@ -11,7 +11,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 	
 	int Joueur::get_point_action(){return _pts_action;}
 
-	void Joueur::init_pa(){_pts_action=50;}
+	void Joueur::init_pa(){_pts_action=_pts_action+=50;}
 	int Joueur::get_Nb_carte_main(){return _carte_main.size();}
 	int Joueur::get_Nb_carte_deck(){return _carte_deck.size();}
 	int Joueur::get_pointdevie(){return _pointdevie;}
@@ -118,5 +118,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 		}
 		//return _carte_main[1];
 		}
+
+   
 			
 		

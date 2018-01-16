@@ -26,6 +26,8 @@ private:
     void main_phase(Joueur* joueur1);
     void choix_attaquant(Joueur *joueur1,Terrain *unbeauterrain);
     void choix_attaque(Joueur *joueur2,Terrain *unbeauterrain);
+    void afficher_Victoire(int indice);
+    void afficher_cara_joueur(Joueur *joueur1,Joueur *joueur2);
 };
 
 #endif
