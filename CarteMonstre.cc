@@ -22,7 +22,7 @@ CarteMonstre::CarteMonstre(std::string nom,int pts_action,int pts_atk,int pdv,Et
 				std::cout << _pdv << std::endl;
 
 }
-	std::string CarteMonstre::get_nom(){return _nom;}
+	std::string CarteMonstre::get_nom() const {return _nom;}
 	//std::vector<Carte*>CarteMonstre::generate_deck(){
 	void CarteMonstre::affiche()const{
 		

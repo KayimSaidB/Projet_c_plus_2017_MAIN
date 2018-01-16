@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Menu.hh"
 #include "Joueur.hh"
-
+#include "CarteSpeciale.hh"
 #define WIDTH 800
 #define HEIGHT 600
 

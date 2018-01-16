@@ -15,35 +15,7 @@
 		
 		}
 
-	void Terrain::afficher_terrain (){
-		std::cout << "*************************" << std::endl;
-		std::cout << "Carte invoqué joueur 1  : " << std::endl;
-		int index_joueur1;
-		int index_joueur2;
-				std::cout << _carte_joueur1.size() << std::endl;
-
-		for (index_joueur1=0;index_joueur1< _carte_joueur1.size();index_joueur1++){
-			std::cout << "-----------------" << std::endl;
-			_carte_joueur1[index_joueur1].affiche();
-			std::cout << "-----------------" << std::endl;
-
-
-		}
-				std::cout << "||||||||VS||||||||||" << std::endl;
-
-		std::cout << "Carte invoqué joueur 2  : " << std::endl;
-
-		for (index_joueur2=0;index_joueur2< _carte_joueur2.size();index_joueur2++){
-			std::cout << "-----------------" << std::endl;
-			_carte_joueur2[index_joueur2].affiche();
-			std::cout << "-----------------" << std::endl;
-
-
-		}
-		std::cout << "*********************" << std::endl;
-
-
-	}
+	
 	Terrain::Terrain(int nbtour, int temps){_nbtour=nbtour; _temps=temps;}
 
 	 bool Terrain::attack_enclenche(int attaquant, int attaque, int numerojoueur){

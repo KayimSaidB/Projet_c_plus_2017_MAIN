@@ -20,6 +20,23 @@ public:
 	std::vector<CarteMonstre> get_carte_joueur1(int indice);
 	bool already_attack_fun(int indicejoueur,int indicecarte);
 	std::vector<CarteMonstre> get_carte_joueur2();
+	void remove_all(int indicejoueur){
+		if (indicejoueur==1) {
+			int i;
+			i=0;
+			while (_carte_joueur1.size()>0){
+			 _carte_joueur1.erase(_carte_joueur1.begin());
+			}
+		}
+		else {
+				int i;
+			i=0;
+			while (_carte_joueur2.size()>0){
+			 _carte_joueur2.erase(_carte_joueur2.begin());
+			}
+		}
+
+	}
 	bool attack_enclenche(int attaquant, int attaque,int numerojoueur);
 	int get_nbrtour();
 	int get_tempstour();

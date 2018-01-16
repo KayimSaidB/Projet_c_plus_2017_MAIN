@@ -15,6 +15,8 @@ int indicecarteattaque=0;
 bool whoseturn=true;
 int countturn=0;
 int indiceperdant;
+CarteSpeciale spetypebien=CarteSpeciale("Charité divine",50, "Vous rend 500 Point de vie",1,1);
+CarteSpeciale spesecondtypebien=CarteSpeciale("Destruction demoniaque",50,"Detruit toutes les cartes de l'adversaire",3,2);
 Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !")
 {
     window.setFramerateLimit(100);
@@ -24,8 +26,8 @@ Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !"
 void Game::run()
 
 {   
-  Joueur untypebien(50,10,"Mohamed",1);
-  Joueur unsecondtypebien(50,10,"Harold",2);
+  Joueur untypebien(50,500,"Mohamed",1);
+  Joueur unsecondtypebien(50,500,"Harold",2);
   Terrain unbeauterrain(0,0); 
   unbeauterrain.attack_reinit(1);
   unbeauterrain.attack_reinit(2);
@@ -43,14 +45,18 @@ music.setVolume(50);
 
     while (window.isOpen())
     {   if (untypebien.get_pointdevie()<=0){
+        std::cout << untypebien.get_pointdevie() << std::endl;
         GameState=9;
         indiceperdant=2;
+        std::cout << "on fout quoi wesh"<<std::endl;
+
          music.stop();
          
     }
         if (unsecondtypebien.get_pointdevie()<=0) {
             GameState=9;
             indiceperdant=1;
+            std::cout << "on fout quoi "<<std::endl;
             music.stop();
         
         }
@@ -124,6 +130,10 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                     case sf::Keyboard::B:
                     GameState=5;
                     break;
+                    case sf::Keyboard::S:
+                    //spetypebien.effet_special(3,joueur1,joueur2,unbeauterrain);
+                    GameState=10;
+                    break;
                     }
              }
     if (GameState==5){
@@ -161,7 +171,15 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                         break;
                     }
              }
-
+    if (GameState==10){
+            switch (event.key.code){
+                    case sf::Keyboard::C:
+                        GameState=11; 
+                        break;
+             }
+                   
+            
+    }
             }
         if  ((monmenu.getMenu(0)).getColor() ==  sf::Color::Black){
             if (event.key.code == sf::Keyboard::Space){
@@ -232,6 +250,15 @@ else {
 
 }
 
+if (GameState==11){
+    GameState=3;
+    bool marche;
+    if (joueur1->get_num()==1)  marche=spetypebien.effet_special(spetypebien.get_indice_effet(),joueur1,joueur2,unbeauterrain);
+    else  marche=spesecondtypebien.effet_special(spesecondtypebien.get_indice_effet(),joueur1,joueur2,unbeauterrain);
+if (marche==false) h=3;
+  
+}
+
 }
 void Game::afficher_Victoire(int indice){
         sf::Font font;
@@ -252,36 +279,18 @@ void Game::afficher_Victoire(int indice){
 void Game::afficher_cara_joueur(Joueur *joueur1,Joueur *joueur2){
     sf::Font font;
     font.loadFromFile("belwe.ttf");
-    std::string pa=std::to_string(joueur1->get_point_action());
-    sf::Text textpa(pa, font, 20);
+    std::string pa=joueur1->affichage();
+    sf::Text textpa(pa, font, 13);
     textpa.setColor(sf::Color(0,0,0));
-    textpa.setPosition(100,535);
+    textpa.setPosition(10,535);
     window.draw(textpa);
-    std::string pdv=std::to_string(joueur1->get_pointdevie());
-    sf::Text textpdv(pdv, font, 20);
-    textpdv.setColor(sf::Color(0,0,0));
-    textpdv.setPosition(100,490);
-    window.draw(textpdv);
-    std::string num="Joueur "+std::to_string(joueur1->get_num());
-    sf::Text textnum(num, font, 20);
-    textnum.setColor(sf::Color(0,0,0));
-    textnum.setPosition(100,450);
-    window.draw(textnum);
-     std::string pa2=std::to_string(joueur2->get_point_action());
-    sf::Text textpa2(pa2, font, 20);
+     std::string pa2=joueur2->affichage();
+    sf::Text textpa2(pa2, font, 13);
     textpa2.setColor(sf::Color(0,0,0));
-    textpa2.setPosition(715,100);
+    textpa2.setPosition(655,100);
     window.draw(textpa2);
-    std::string pdv2=std::to_string(joueur2->get_pointdevie());
-    sf::Text textpdv2(pdv2, font, 20);
-    textpdv2.setColor(sf::Color(0,0,0));
-    textpdv2.setPosition(715,55);
-    window.draw(textpdv2);
-     std::string num2="Joueur "+std::to_string(joueur2->get_num());
-    sf::Text textnum2(num2, font, 20);
-    textnum2.setColor(sf::Color(0,0,0));
-    textnum2.setPosition(700,25);
-    window.draw(textnum2);
+   
+
 
 }
 void Game::afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2){
@@ -463,18 +472,32 @@ void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
     int i;
     sf::Font font;
     font.loadFromFile("belwe.ttf");
-    if (GameState == 1 || GameState ==3 || GameState==5 || GameState==6){
+    if (GameState == 1 || GameState ==3 || GameState==5 || GameState==6 || GameState==10){
         afficher_terrain_vide(joueur1,joueur2);
         afficher_carte_main(joueur1,joueur2);
         afficher_terrain_rempli(joueur1,joueur2,unbeauterrain);
     if (GameState==3 || GameState==1){
         GameState=3;
         main_phase(joueur1);
-
 }
 if ((GameState==5) && countturn>0){
+   choix_attaquant(joueur1,unbeauterrain);
+}
+if (GameState==10){
+    std::string textlourd2;
+    if (joueur1->get_num()==1) textlourd2 = spetypebien.affichage();
+    else textlourd2=spesecondtypebien.affichage();
+    sf::Text text2(textlourd2, font, 13);
+    text2.setColor(sf::Color(0,0,0));
+    text2.setPosition(250,280);
+    window.draw(text2);
+    std::string textlourd3="Espace pour Revenir, C pour poser la carte";
+    sf::Text text3(textlourd3, font, 13);
+    text3.setColor(sf::Color(0,0,0));
+    text3.setPosition(230,455);
+    window.draw(text3);
 
-    choix_attaquant(joueur1,unbeauterrain);
+
 }
 if (GameState==6 && unbeauterrain->get_carte_joueur1(joueur2->get_num()).size() >0){
    choix_attaque(joueur2,unbeauterrain);
@@ -488,7 +511,7 @@ if (GameState==6 && unbeauterrain->get_carte_joueur1(joueur2->get_num()).size() 
   	std::string textlourd2= "On attaque pas des le premier tour voyons !";
     sf::Text text2(textlourd2, font, 13);
     text2.setColor(sf::Color(0,0,0));
-    text2.setPosition(230,455);
+    text2.setPosition(250,280);
     window.draw(text2);
    GameState=3;
   }

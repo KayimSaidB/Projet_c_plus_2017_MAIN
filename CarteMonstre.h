@@ -9,7 +9,7 @@ class CarteMonstre : public Carte
 	int _pdv;
 	Etat _mon_etat;
 	Attribut _mon_attribut;
-	std::string nom;
+	std::string _nom;
 public:
 	std::string get_description() const;
 	int get_point_action()const;
@@ -18,7 +18,7 @@ public:
 	int get_pts_atk();
 	int get_pdv(); 
 	void set_pdv(int newpdv);
-	std::string get_nom();
+	std::string get_nom() const;
 	void affiche() const;
 	CarteMonstre(std::string nom,int pts_action,int pts_atk,int _pdv,Etat _mon_etat,Attribut _mon_attribut);
    ~CarteMonstre(){};
