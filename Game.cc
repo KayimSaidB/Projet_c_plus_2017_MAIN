@@ -17,7 +17,7 @@ int countturn=0;
 int indiceperdant;
 CarteSpeciale spetypebien=CarteSpeciale("Charité divine",50, "Vous rend 500 Point de vie",1,1);
 CarteSpeciale spesecondtypebien=CarteSpeciale("Destruction demoniaque",50,"Detruit toutes les cartes de l'adversaire",3,2);
-Game::Game() : window(sf::VideoMode(WIDTH,HEIGHT),"Welcome To Paradise Papers !")
+Game::Game() : window(sf::VideoMode(1200,812),"Welcome To Paradise Papers !")
 {
     window.setFramerateLimit(100);
 
@@ -280,14 +280,14 @@ void Game::afficher_cara_joueur(Joueur *joueur1,Joueur *joueur2){
     sf::Font font;
     font.loadFromFile("belwe.ttf");
     std::string pa=joueur1->affichage();
-    sf::Text textpa(pa, font, 13);
+    sf::Text textpa(pa, font, 14);
     textpa.setColor(sf::Color(0,0,0));
-    textpa.setPosition(10,535);
+    textpa.setPosition(134,696);
     window.draw(textpa);
      std::string pa2=joueur2->affichage();
-    sf::Text textpa2(pa2, font, 13);
+    sf::Text textpa2(pa2, font, 14);
     textpa2.setColor(sf::Color(0,0,0));
-    textpa2.setPosition(655,100);
+    textpa2.setPosition(128,68);
     window.draw(textpa2);
    
 
@@ -297,20 +297,9 @@ void Game::afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2){
      
         sf::Texture Terrain;
         window.clear();
-        Terrain.loadFromFile("TerrainCarte.png");
+        Terrain.loadFromFile("plage2.png");
         sf::Sprite spT(Terrain);
         window.draw(spT);
-        sf::Texture pioche;
-        pioche.loadFromFile("doscarte.png");
-        sf::Sprite spritepioche(pioche);
-        spritepioche.scale(sf::Vector2f(0.15f, 0.15f));
-        spritepioche.setPosition(sf::Vector2f(675, 500)); 
-        sf::Sprite spritepioche2(pioche);
-        spritepioche2.scale(sf::Vector2f(0.15f, 0.15f));
-        spritepioche2.setPosition(sf::Vector2f(185, 135)); 
-        spritepioche2.setRotation(180);
-        window.draw(spritepioche);
-        window.draw(spritepioche2);
         afficher_cara_joueur(joueur1,joueur2);
    
         
@@ -319,39 +308,32 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
     ///sert à afficher les mains de chaque joueur selon leur perspective
         int i;
         sf::Texture cartemain;
-        cartemain.loadFromFile("evasioncarte.jpg");
-        
-        sf::Texture pioche;
-        pioche.loadFromFile("doscarte.png");
-        sf::Sprite spritepioche(pioche);
+        cartemain.loadFromFile("cartejouee.png");
+
         for (i=0;i<joueur1->get_Nb_carte_main();i++){
         sf::Sprite cartetemp(cartemain);
-        cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
-        cartetemp.setPosition(sf::Vector2f(164+i*70, 485));
+        cartetemp.setPosition(sf::Vector2f(410+i*75, 675));
         int rouge=(joueur1->get_main())[i].get_pts_atk();
         int bleu=(joueur1->get_main())[i].get_pdv();
         int vert=(joueur1->get_main())[i].get_point_action();
         cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
         window.draw(cartetemp);
         }
-        for (i=0;i<joueur2->get_Nb_carte_main();i++){
-        sf::Sprite cartetemp(pioche);
-        cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
-        cartetemp.setPosition(sf::Vector2f(524-i*70, 125));
-        cartetemp.setRotation(180);
-        window.draw(cartetemp);
-        }
+     
     }
     void Game::afficher_terrain_rempli(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain){
      sf::Texture carteterrain;
-    carteterrain.loadFromFile("evasion_invoque.png");
+     sf::Texture carteterrain2;
+    carteterrain.loadFromFile("carteposee.png");
+    carteterrain2.loadFromFile("carteposeeface.png");
+
     int i;
     sf::Texture swordT;
     swordT.loadFromFile("sword.png");
  for (i=0;i<unbeauterrain->get_carte_joueur1(joueur1->get_num()).size();i++){
         sf::Sprite cartetemp(carteterrain);
         cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
-        cartetemp.setPosition(sf::Vector2f(110+i*100,345));
+        cartetemp.setPosition(sf::Vector2f(413+i*100,534));
         int rouge=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pts_atk();
         int bleu=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_point_action();
@@ -360,21 +342,19 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
     if(unbeauterrain->already_attack_fun(joueur1->get_num(),i)==true){
             sf::Sprite sword(swordT);
             sword.scale(sf::Vector2f(0.05f, 0.05f));
-            sword.setPosition(sf::Vector2f(110+i*100,345));
+            sword.setPosition(sf::Vector2f(460+i*100,530));
             window.draw(sword);
 
       }
         
         }
           for (i=0;i<unbeauterrain->get_carte_joueur1(joueur2->get_num()).size();i++){
-        sf::Sprite cartetemp(carteterrain);
-        cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
-        cartetemp.setPosition(sf::Vector2f(150+i*100,175));
+        sf::Sprite cartetemp(carteterrain2);
+        cartetemp.setPosition(sf::Vector2f(425+i*75,170));
         int rouge=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_pts_atk();
         int bleu=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_point_action();
         cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
-        //cartetemp.setRotation(180);
         window.draw(cartetemp);
         }
 
@@ -389,35 +369,34 @@ void Game::main_phase(Joueur* joueur1){
     std::string textlourd= (joueur1->get_main())[indicecarteivo%joueur1->get_Nb_carte_main()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
-    text.setPosition(250,280);
+    text.setPosition(415,439);
     window.draw(text);
     sf::Texture curseur;
     curseur.loadFromFile("cursor.png");
-    sf::Sprite spritecurseur(curseur);
-    //spritecurseur.scale(sf::Vector2f(0.15f, 0.15f));
-    spritecurseur.setPosition(sf::Vector2f(164+indicecarteivo%joueur1->get_Nb_carte_main()*70,485));
+    sf::Sprite spritecurseur(curseur);;
+    spritecurseur.setPosition(sf::Vector2f(452+indicecarteivo%joueur1->get_Nb_carte_main()*80,733));
     window.draw(spritecurseur);
     if (h==3){ /// pas assez de point d'action pour poser
-    std::string textlourd= "Pas assez de point d'action ! N'avez vous donc pas honte ?";
+    std::string textlourd= "Pas assez de point d'action !\n\n N'avez vous donc pas honte ?";
     sf::Text text(textlourd, font, 13);
-    text.setColor(sf::Color(0,0,0));
-    text.setPosition(230,455);
+    text.setColor(sf::Color::White);
+    text.setPosition(890,63);
     window.draw(text);
     }
     else {if (h==4){ /// Cherche à attaquer alors que ca déjà été effectué
-    std::string textlourd= "Votre Monstre a deja attaque, cessez cette gourmandise";
+    std::string textlourd= "Votre Monstre a deja attaque,\n\n cessez cette gourmandise";
     sf::Text text(textlourd, font, 13);
-    text.setColor(sf::Color(0,0,0));
-    text.setPosition(230,455);
+    text.setColor(sf::Color::White);
+    text.setPosition(890,63);
     window.draw(text);
 h=8;
 }
   
     else {
-    std::string textlourd= "Voulez vous poser cette carte , appuyez sur espace pour confirmer\n\npasser  a la phase attaque avec B, passer son tour avec P";
+    std::string textlourd= "Voulez vous poser cette carte ,\n\n appuyez sur espace pour confirmer\n\n passer  a la phase attaque avec B,\n\n passer son tour avec P";
     sf::Text text(textlourd, font, 13);
-    text.setColor(sf::Color(0,0,0));
-    text.setPosition(230,455);
+    text.setColor(sf::Color::White);
+    text.setPosition(890,63);
     window.draw(text);
 
     
@@ -431,17 +410,17 @@ void Game::choix_attaquant(Joueur *joueur1,Terrain *unbeauterrain){
     std::string textlourd= unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
-    text.setPosition(250,280);
+    text.setPosition(415,439);
     window.draw(text);
-    std::string textlourd2= "Voulez vous attaquer avec cette carte, appuyez A pour confirmer";
+    std::string textlourd2= "Voulez vous attaquer avec cette carte,\n\n appuyez A pour confirmer";
     sf::Text text2(textlourd2, font, 13);
-    text2.setColor(sf::Color(0,0,0));
-    text2.setPosition(230,455);
+    text2.setColor(sf::Color::White);
+    text2.setPosition(890,63);
     window.draw(text2);
     sf::Texture curseur;
     curseur.loadFromFile("cursor.png");
     sf::Sprite spritecurseur(curseur);
-    spritecurseur.setPosition(sf::Vector2f(110+indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()*100,345));
+    spritecurseur.setPosition(sf::Vector2f(450+indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()*100,570));
     window.draw(spritecurseur);
 
 }
@@ -451,18 +430,17 @@ void Game::choix_attaque(Joueur *joueur2,Terrain *unbeauterrain){
      std::string textlourd= unbeauterrain->get_carte_joueur1(joueur2->get_num())[indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
-    text.setPosition(250,280);
+    text.setPosition(474,280);
     window.draw(text);
-    std::string textlourd2= "Voulez vous attaquer cette carte, appuyez C pour confirmer, D pour une attaque directe";
+    std::string textlourd2= "Voulez vous attaquer cette carte,\n\n appuyez C pour confirmer,\n\n D pour une attaque directe";
     sf::Text text2(textlourd2, font, 13);
-    text2.setColor(sf::Color(0,0,0));
-    text2.setPosition(230,455);
+    text2.setColor(sf::Color::White);
+    text2.setPosition(890,63);
     window.draw(text2);
     sf::Texture curseur;
     curseur.loadFromFile("cursor.png");
     sf::Sprite spritecurseur(curseur);
-    //spritecurseur.scale(sf::Vector2f(0.15f, 0.15f));
-    spritecurseur.setPosition(sf::Vector2f(150+indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()*100,175));
+    spritecurseur.setPosition(sf::Vector2f(474+indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()*75,216));
     window.draw(spritecurseur);
 }
 void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
@@ -491,10 +469,10 @@ if (GameState==10){
     text2.setColor(sf::Color(0,0,0));
     text2.setPosition(250,280);
     window.draw(text2);
-    std::string textlourd3="Espace pour Revenir, C pour poser la carte";
+    std::string textlourd3="Espace pour Revenir,\n\n C pour poser la carte";
     sf::Text text3(textlourd3, font, 13);
-    text3.setColor(sf::Color(0,0,0));
-    text3.setPosition(230,455);
+    text3.setColor(sf::Color::White);
+    text3.setPosition(890,63);
     window.draw(text3);
 
 
@@ -508,10 +486,10 @@ if (GameState==6 && unbeauterrain->get_carte_joueur1(joueur2->get_num()).size() 
   }
   if((GameState==5) && countturn==0){
   	
-  	std::string textlourd2= "On attaque pas des le premier tour voyons !";
+  	std::string textlourd2= "On attaque pas des le premier tour voyons !\n\n";
     sf::Text text2(textlourd2, font, 13);
-    text2.setColor(sf::Color(0,0,0));
-    text2.setPosition(250,280);
+    text2.setColor(sf::Color::White);
+    text2.setPosition(890,63);
     window.draw(text2);
    GameState=3;
   }

@@ -5,8 +5,8 @@
 #include "Menu.hh"
 #include "Joueur.hh"
 #include "CarteSpeciale.hh"
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 1200
+#define HEIGHT 819
 
 class Game
 {
