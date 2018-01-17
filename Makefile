@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-W -Wall -ansi -pedantic -g -std=c++1
 LDFLAGS= -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -std=c++11
 EXEC=sfml-app
-SRC= terrain.cc joueur.cc CarteMonstre.cc CarteSpeciale.cc Game.cc Menu.cc Jeu.cc 
+SRC= Source/terrain.cc Source/joueur.cc Source/CarteMonstre.cc Source/CarteSpeciale.cc Source/Game.cc Source/Menu.cc Source/Jeu.cc 
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC) 
