@@ -89,8 +89,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 
 	bool Joueur::choisir_carte_dans_main_et_poser(Terrain *terrainactuel,int choix){
 			int sizecart=_carte_main.size();
-			std::cout <<"sizecart"<< std::endl;
-			std::cout << sizecart << std::endl;
+	
 
 		 // choix de la carte 0 si egale à 1 alors on sort de la boucle et en retourne la carte;
 
@@ -98,16 +97,14 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 		
 			CarteMonstre kayim = _carte_main[choix];
 			if(kayim.get_point_action() > _pts_action){
-			std::cout <<"Impossible de poser cette carte"<<std::endl;
-			std::cout <<" Plus assez de point d'action" << std::endl;
+			
 			return false;
 				}
 				
 			else{
 			_pts_action =_pts_action- kayim.get_point_action();
 			terrainactuel->push_that_card( kayim,_numero_joueur);
-			std::cout << choix << std::endl;
-			std::cout << sizecart << std::endl;
+			
 
 			_carte_main.erase(_carte_main.begin()+(choix%sizecart));
 			return true;

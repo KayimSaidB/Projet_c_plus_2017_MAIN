@@ -18,9 +18,9 @@ int indicecarteattaquant=0; /// indique la carte qui attaque
 int indicecarteattaque=0; /// indique la carte qui est attaqué
 bool whoseturn=true; // indique le tour de jeu, joueur 1 -> vrai, joueur 2 -> faux
 int countturn=0; /// compteur de tour
-int indiceperdant=4; /// indice du joueur perdant
-CarteSpeciale spetypebien=CarteSpeciale("Charite divine",50, "Vous rend 500 Point de vie",1,1); /// declaration carte speciale joueur 1
-CarteSpeciale spesecondtypebien=CarteSpeciale("Destruction demoniaque",50,"Detruit toutes les cartes de l'adversaire",3,2); // joueur 2
+int indiceperdant=4; /// indice du joueur perdanr
+
+
 Game::Game() : window(sf::VideoMode(1200,720),"Welcome To Paradise Papers !") /// ecran de base 
 {
     window.setFramerateLimit(100);
@@ -29,11 +29,13 @@ Game::Game() : window(sf::VideoMode(1200,720),"Welcome To Paradise Papers !") //
 
 void Game::run() //  fonction principale du module de jeu
 
-{  srand(time(NULL));
+{  
 
   Joueur untypebien(50,500,"Mohamed",1); /// declaration joueur 1
   Joueur unsecondtypebien(50,500,"Harold",2); /// joueur 2
   Terrain unbeauterrain(0,0);  /// le terrain de jeu
+  CarteSpeciale spetypebien=CarteSpeciale(120,rand()%3,1); /// declaration carte speciale joueur 1
+CarteSpeciale spesecondtypebien=CarteSpeciale(120,rand()%3,2); // joueu
   unbeauterrain.attack_reinit(1); /// on reinitalise le dictionnaire des cartes qui ont attaque 
   unbeauterrain.attack_reinit(2);
 ///musique
@@ -48,7 +50,6 @@ music.setVolume(50);
 
     while (window.isOpen()) ///boucle principale
     {   if (untypebien.get_pointdevie()<=0){ /// on check si defaite
-        std::cout << untypebien.get_pointdevie() << std::endl;
         GameState=9; /// changement d'etat
         indiceperdant=2; // indice du gagnant en fait 
          music.stop();
@@ -61,21 +62,21 @@ music.setVolume(50);
         
         }
         if (whoseturn==true){ // joueur 2 qui joue
-        processEvents(&unsecondtypebien,&untypebien,&unbeauterrain);
-        update(&unsecondtypebien,&untypebien,&unbeauterrain);
-        render(&unsecondtypebien,&untypebien,&unbeauterrain);
+        processEvents(&unsecondtypebien,&untypebien,&unbeauterrain,spetypebien,spesecondtypebien);
+        update(&unsecondtypebien,&untypebien,&unbeauterrain,spetypebien,spesecondtypebien);
+        render(&unsecondtypebien,&untypebien,&unbeauterrain,spetypebien,spesecondtypebien);
     }
     else { /// joueur 1 qui joue 
 
-        processEvents(&untypebien,&unsecondtypebien,&unbeauterrain);
-        update(&untypebien,&unsecondtypebien,&unbeauterrain);
-        render(&untypebien,&unsecondtypebien,&unbeauterrain);
+        processEvents(&untypebien,&unsecondtypebien,&unbeauterrain,spetypebien,spesecondtypebien);
+        update(&untypebien,&unsecondtypebien,&unbeauterrain,spetypebien,spesecondtypebien);
+        render(&untypebien,&unsecondtypebien,&unbeauterrain,spetypebien,spesecondtypebien);
     }
     }
        
 }
 
-void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
+void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain,CarteSpeciale spetypebien,CarteSpeciale spesecondtypebien)
 { /// sert a gerer les evenements au fur et a mesure notamment les touches 
     sf::Event event;
     int vache=0;
@@ -205,7 +206,7 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
 }
 
 
-void Game::update(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
+void Game::update(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain,CarteSpeciale spetypebien,CarteSpeciale spesecondtypebien)
 { /// met le jeu a jour selon les etats
     if (GameState == 1 && h==4){
     int c;
@@ -255,8 +256,8 @@ else {
 if (GameState==11){ /// on gere l'utilisation de la carte spéciale
     GameState=3;
     bool marche;
-    if (joueur1->get_num()==1)  marche=spetypebien.effet_special(spetypebien(),joueur1,joueur2,unbeauterrain);
-    else  marche=spesecondtypebien.effet_special(spesecondtypebien(),joueur1,joueur2,unbeauterrain);
+    if (joueur1->get_num()==1)  marche=spetypebien.effet_special(joueur1,joueur2,unbeauterrain);
+    else  marche=spesecondtypebien.effet_special(joueur1,joueur2,unbeauterrain);
 if (marche==false) h=3;
   
 }
@@ -476,7 +477,7 @@ void Game::choix_attaque(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
     spritecurseur.setPosition(sf::Vector2f(474+indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()*75,146));
     window.draw(spritecurseur);
 }
-void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
+void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain,CarteSpeciale spetypebien,CarteSpeciale spesecondtypebien)
 {   
     /// affichage general appel a toutes les autres fonctions
     window.clear();
@@ -504,7 +505,7 @@ if (GameState==10){
     else textlourd2=spesecondtypebien.affichage();
     sf::Text text2(textlourd2, font, 13);
     text2.setColor(sf::Color(0,0,0));
-    text2.setPosition(250,280);
+    text2.setPosition(36,262);
     window.draw(text2);
     std::string textlourd3="Espace pour Revenir,\n\n C pour poser la carte";
     sf::Text text3(textlourd3, font, 13);

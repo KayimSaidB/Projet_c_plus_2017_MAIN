@@ -16,9 +16,9 @@ public:
     ~Game(){};
 
 private:
-    void processEvents(Joueur* joueur1,Joueur * joueur2,Terrain *unbeauterrain);
-    void update(Joueur* joueur1,Joueur * joueur2,Terrain *unbeauterrain);
-    void render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain);
+    void processEvents(Joueur* joueur1,Joueur * joueur2,Terrain *unbeauterrain,CarteSpeciale spetypebien,CarteSpeciale spesecondtypebien);
+    void update(Joueur* joueur1,Joueur * joueur2,Terrain *unbeauterrain,CarteSpeciale spetypebien,CarteSpeciale spesecondtypebien);
+    void render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain,CarteSpeciale spetypebien,CarteSpeciale spesecondtypebien);
     void afficher_terrain_vide(Joueur *joueur1,Joueur *joueur2);
     void afficher_carte_main(Joueur *joueur1,Joueur *joueur2);
     sf::RenderWindow window;

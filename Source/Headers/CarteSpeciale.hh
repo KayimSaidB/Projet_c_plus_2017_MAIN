@@ -19,11 +19,11 @@ int _indiceffet;
 int _indiceowner; /// indice du joueur a qui appartient la carte
 public:
  std::string get_description() const {return _description;};
- CarteSpeciale(std::string nom,int pts_action, std::string description,int indiceeffet,int indiceowner);
+ CarteSpeciale(int pts_action,int indiceeffet,int indiceowner);
  int get_point_action() const{return _pts_action;};
  std::string affichage() const {return "Nom de la carte speciale : "+_nom +"\n\n"+_description+" Point d'action : "+std::to_string(_pts_action);};
  std::string get_nom() const{return _nom;};
- bool effet_special(int indice,Joueur *joueur1,Joueur *joueur2, Terrain *unbeauterrain);
+ bool effet_special(Joueur *joueur1,Joueur *joueur2, Terrain *unbeauterrain);
  int get_indice_effet(){return _indiceffet;};
  int operator()(){return _indiceffet;}
  ~CarteSpeciale(){};
