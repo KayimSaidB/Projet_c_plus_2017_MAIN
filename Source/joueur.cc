@@ -11,7 +11,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 	
 	int Joueur::get_point_action() const{return _pts_action;}
 
-	void Joueur::init_pa(){_pts_action=_pts_action+=50;}
+	void Joueur::init_pa(){_pts_action=_pts_action+=20;}
 	int Joueur::get_Nb_carte_main(){return _carte_main.size();}
 	int Joueur::get_Nb_carte_deck(){return _carte_deck.size();}
 	int Joueur::get_pointdevie(){return _pointdevie;}
@@ -40,9 +40,9 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
   		std::vector<std::string> liste_titres_boy;
   		std::vector<std::string> liste_titres_girl;
 		std::vector<std::string> liste_complement;
-  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Cecile","Rihanna","Anida","Mina","Sophia","Paola","Claire","Ines","Isma","Suzanne","Alexia","Rama","Myriam","Fatine","Colette","Mahshid"}; //8
-  		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick","Onizuka","Jean-Louis","Kenshin","Hilbert","Ayman","Aurelien","Vincent","Boussad","Walid","Damso","Tarik","Stef","Mr Pecheux","Taha","Nico"}; ///8
+		liste_boy={"Harold","Mohamed","Geng","Kayim","Lancelot","Romaric","Fourier","Kendrick","Onizuka","Jean-Louis","Kenshin","Hilbert","Ayman","Aurelien","Vincent","Boussad","Walid","Damso","Tarik","Stef","Mr Pecheux","Taha","Nico"}; ///8
   		liste_titres_boy={"Le pourfendeur","Le Dieu","L'empereur","L'elu","Le controleur","Le Chevalier","Le Roi","Le Magicien","Le Choisi","Le Seigneur","Le Dompteur","Le Prince"}; // 8
+  		liste_girl={"Isma","Suzanne","Beyonce","Leia","Bulma","Cecile","Rihanna","Anida","Mina","Sophia","Paola","Claire","Ines","Isma","Suzanne","Alexia","Rama","Myriam","Fatine","Colette","Mahshid"}; //8
   		liste_titres_girl={"La pourfendrice","La Deesse","L'imperatrice","L'elue","La controleuse","La Chevaliere","La Reine","La Magicienne","La Choisie","La Princesse","La Domptrice","La Sorciere"}; //8
   		liste_complement={"Des tenebres","Du Soleil","Des flammes","Des toilettes","De l'informatique","Des mathematiques","Des Dragons Noirs aux yeux rouges","Des paradis fiscaux","Des Problemes NP complets","Des Algorithmes Recursifs","Des Ingenieurs","Des Compilateurs","Des banquiers","Des Evades Fiscaux en Suisse","Des Pratiquants de Musculation intensive","Des schemas de Ponzi"}; //9
 
@@ -52,7 +52,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
   			int indicetitres=rand()%liste_titres_girl.size();
   			int indicecompl=rand()%liste_complement.size();
   			std::string lenom;
-  			lenom=liste_girl[indiceprenom]+" "+ liste_titres_girl[indicetitres]+" "+liste_complement[indicecompl];
+  			lenom=liste_girl[indiceprenom]+" "+ liste_titres_girl[indicetitres]+"\n\n"+liste_complement[indicecompl];
   			int nbatt=rand()%maxatt;
   			int nbpdv=rand()%maxpdv;
   			do{
@@ -62,7 +62,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
   			while (equilibrage<nbatt+nbpdv);
   		    equilibrage=equilibrage-nbatt-nbpdv;
   			int nb_pa=(nbatt+nbpdv)/10;
-			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv,DansDeck,Guerrier));
+			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv));
 
   		}
   		for (i=0;i<nbcartedebut/2;i++){ /// boucle des garcons
@@ -70,7 +70,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
   			int indicetitres=rand()%liste_titres_boy.size();
   			int indicecompl=rand()%liste_complement.size();
   			std::string lenom;
-  			lenom=liste_boy[indiceprenom]+" "+ liste_titres_boy[indicetitres]+" "+liste_complement[indicecompl];
+  			lenom=liste_boy[indiceprenom]+" "+ liste_titres_boy[indicetitres]+"\n\n"+liste_complement[indicecompl];
   			int nbatt=rand()%maxatt;
   			int nbpdv=rand()%maxpdv;
   			do{
@@ -80,7 +80,7 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
   			while (equilibrage<nbatt+nbpdv);
   		    equilibrage=equilibrage-nbatt-nbpdv;
   			int nb_pa=(nbatt+nbpdv)/10;
-			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv,DansDeck,Guerrier));
+			_carte_deck.push_back(CarteMonstre(lenom,nb_pa,nbatt,nbpdv));
 
   		}
 

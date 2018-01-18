@@ -123,7 +123,7 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                     whoseturn=not whoseturn;
                     joueur1->init_pa();
                     unbeauterrain->attack_reinit(joueur1->get_num());
-                   unbeauterrain->attack_reinit(joueur2->get_num());
+                    //unbeauterrain->attack_reinit(joueur2->get_num());
 
                      if (joueur2->get_Nb_carte_main()<5)joueur2->pioche_une_carte();
                      countturn++;
@@ -316,9 +316,8 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
         sf::Sprite cartetemp(cartemain);
         cartetemp.setPosition(sf::Vector2f(410+i*75, 585));
         int rouge=(joueur1->get_main())[i].get_pts_atk();
-        int bleu=(joueur1->get_main())[i].get_pdv();
         int vert=(joueur1->get_main())[i].get_point_action();
-        cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
+        cartetemp.setColor(sf::Color(rouge%255,rouge%255,vert%255));
         window.draw(cartetemp);
         }
      
@@ -338,9 +337,8 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
         cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
         cartetemp.setPosition(sf::Vector2f(413+i*100,444));
         int rouge=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pts_atk();
-        int bleu=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_point_action();
-        cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
+        cartetemp.setColor(sf::Color(rouge%255,rouge%255,vert%255));
        window.draw(cartetemp);
     if(unbeauterrain->already_attack_fun(joueur1->get_num(),i)==true){
             sf::Sprite sword(swordT);
@@ -355,9 +353,8 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
         sf::Sprite cartetemp(carteterrain2);
         cartetemp.setPosition(sf::Vector2f(425+i*75,140));
         int rouge=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_pts_atk();
-        int bleu=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_point_action();
-        cartetemp.setColor(sf::Color(rouge%255,bleu%255,vert%255));
+        cartetemp.setColor(sf::Color(rouge%255,rouge%255,vert%255));
         window.draw(cartetemp);
         }
 
