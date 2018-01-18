@@ -20,7 +20,6 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 	
 	
 	void Joueur::pioche_une_carte(){
-		srand(time(NULL));
 		int sizecart=_carte_deck.size();
 		int j=rand()%sizecart;
 		CarteMonstre macarte=_carte_deck[j];
@@ -36,7 +35,6 @@ Joueur::Joueur(int pts_action,int pointdevie,std::string nom,int numero_joueur){
 		int maxpa=(maxpdv+maxatt)/10;
 		int nbcartedebut=10;
 		int equilibrage=((maxpdv+maxatt)/2)*nbcartedebut;
-		srand(time(NULL));
   		std::vector<std::string> liste_boy;
   		std::vector<std::string> liste_girl;
   		std::vector<std::string> liste_titres_boy;

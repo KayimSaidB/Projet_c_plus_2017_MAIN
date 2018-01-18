@@ -6,7 +6,7 @@
 #include "Joueur.hh"
 #include "CarteSpeciale.hh"
 #define WIDTH 1200
-#define HEIGHT 819
+#define HEIGHT 720
 
 class Game
 {
@@ -25,7 +25,7 @@ private:
     void afficher_terrain_rempli(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain);
     void main_phase(Joueur* joueur1);
     void choix_attaquant(Joueur *joueur1,Terrain *unbeauterrain);
-    void choix_attaque(Joueur *joueur2,Terrain *unbeauterrain);
+    void choix_attaque(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain);
     void afficher_Victoire(int indice);
     void afficher_cara_joueur(Joueur *joueur1,Joueur *joueur2);
 };

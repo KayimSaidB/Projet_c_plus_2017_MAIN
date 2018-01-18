@@ -13,15 +13,15 @@ Menu monmenu(WIDTH, HEIGHT);
 ///7 : Attaque enclenché  8 : Attaque direct  9 : Etat jeu terminé 10 :Carte speciale a afficher 11 : Carte Speciale a jouer
 int GameState =0; /// INdique l'etat du jeu
 int h=4; /// variable pour les message d'erreur 
-int indicecarteivo; /// indice de la carte à invoquer
+int indicecarteivo=0; /// indice de la carte à invoquer
 int indicecarteattaquant=0; /// indique la carte qui attaque
 int indicecarteattaque=0; /// indique la carte qui est attaqué
 bool whoseturn=true; // indique le tour de jeu, joueur 1 -> vrai, joueur 2 -> faux
 int countturn=0; /// compteur de tour
-int indiceperdant; /// indice du joueur perdant
+int indiceperdant=4; /// indice du joueur perdant
 CarteSpeciale spetypebien=CarteSpeciale("Charite divine",50, "Vous rend 500 Point de vie",1,1); /// declaration carte speciale joueur 1
 CarteSpeciale spesecondtypebien=CarteSpeciale("Destruction demoniaque",50,"Detruit toutes les cartes de l'adversaire",3,2); // joueur 2
-Game::Game() : window(sf::VideoMode(1200,812),"Welcome To Paradise Papers !") /// ecran de base 
+Game::Game() : window(sf::VideoMode(1200,720),"Welcome To Paradise Papers !") /// ecran de base 
 {
     window.setFramerateLimit(100);
 
@@ -29,7 +29,8 @@ Game::Game() : window(sf::VideoMode(1200,812),"Welcome To Paradise Papers !") //
 
 void Game::run() //  fonction principale du module de jeu
 
-{   
+{  srand(time(NULL));
+
   Joueur untypebien(50,500,"Mohamed",1); /// declaration joueur 1
   Joueur unsecondtypebien(50,500,"Harold",2); /// joueur 2
   Terrain unbeauterrain(0,0);  /// le terrain de jeu
@@ -43,7 +44,6 @@ music.setLoop(true);
 music.setVolume(50);
     ///on initialise les decks on freeze le jeu 1 seconde pour pas avoir les memes decs générés
      untypebien.init_deck();
-    std::this_thread::sleep_for(std::chrono::seconds(1)); 
    unsecondtypebien.init_deck(); 
 
     while (window.isOpen()) ///boucle principale
@@ -102,8 +102,9 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                     break;
                  }
                 }
+
              if (GameState==3){ /// phase principale choix des cartes a invoquer on fait bouger l'indice pour afficher la carte qu'on veut invoquer
-                switch (event.key.code){
+               switch (event.key.code){
                     case sf::Keyboard::Space:
                         vache=3; //invocation qui se fait 
                         break;
@@ -135,6 +136,7 @@ void Game::processEvents(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
                     GameState=10;
                     break;
                     }
+
              }
     if (GameState==5){ //Etat ou il faut choisir la carte qui va attaquer
                 switch (event.key.code){
@@ -282,7 +284,7 @@ void Game::afficher_cara_joueur(Joueur *joueur1,Joueur *joueur2){ // affichage d
     std::string pa=joueur1->affichage();
     sf::Text textpa(pa, font, 14);
     textpa.setColor(sf::Color(0,0,0));
-    textpa.setPosition(134,696);
+    textpa.setPosition(134,596);
     window.draw(textpa);
      std::string pa2=joueur2->affichage();
     sf::Text textpa2(pa2, font, 14);
@@ -312,7 +314,7 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
 
         for (i=0;i<joueur1->get_Nb_carte_main();i++){
         sf::Sprite cartetemp(cartemain);
-        cartetemp.setPosition(sf::Vector2f(410+i*75, 675));
+        cartetemp.setPosition(sf::Vector2f(410+i*75, 585));
         int rouge=(joueur1->get_main())[i].get_pts_atk();
         int bleu=(joueur1->get_main())[i].get_pdv();
         int vert=(joueur1->get_main())[i].get_point_action();
@@ -334,7 +336,7 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
  for (i=0;i<unbeauterrain->get_carte_joueur1(joueur1->get_num()).size();i++){
         sf::Sprite cartetemp(carteterrain);
         cartetemp.scale(sf::Vector2f(0.15f, 0.15f));
-        cartetemp.setPosition(sf::Vector2f(413+i*100,534));
+        cartetemp.setPosition(sf::Vector2f(413+i*100,444));
         int rouge=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pts_atk();
         int bleu=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur1->get_num())[i].get_point_action();
@@ -342,8 +344,8 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
        window.draw(cartetemp);
     if(unbeauterrain->already_attack_fun(joueur1->get_num(),i)==true){
             sf::Sprite sword(swordT);
-            sword.scale(sf::Vector2f(0.05f, 0.05f));
-            sword.setPosition(sf::Vector2f(460+i*100,530));
+            sword.scale(sf::Vector2f(0.03f, 0.03f));
+            sword.setPosition(sf::Vector2f(420+i*100,460));
             window.draw(sword);
 
       }
@@ -351,7 +353,7 @@ void Game::afficher_carte_main(Joueur *joueur1,Joueur *joueur2){
         }
           for (i=0;i<unbeauterrain->get_carte_joueur1(joueur2->get_num()).size();i++){
         sf::Sprite cartetemp(carteterrain2);
-        cartetemp.setPosition(sf::Vector2f(425+i*75,170));
+        cartetemp.setPosition(sf::Vector2f(425+i*75,140));
         int rouge=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_pts_atk();
         int bleu=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_pdv();
         int vert=unbeauterrain->get_carte_joueur1(joueur2->get_num())[i].get_point_action();
@@ -373,12 +375,12 @@ void Game::main_phase(Joueur* joueur1){
     std::string textlourd= (joueur1->get_main())[indicecarteivo%joueur1->get_Nb_carte_main()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
-    text.setPosition(415,439);
+    text.setPosition(36,262);
     window.draw(text);
     sf::Texture curseur;
     curseur.loadFromFile("Source/Images/cursor.png");
     sf::Sprite spritecurseur(curseur);;
-    spritecurseur.setPosition(sf::Vector2f(452+indicecarteivo%joueur1->get_Nb_carte_main()*80,733));
+    spritecurseur.setPosition(sf::Vector2f(452+indicecarteivo%joueur1->get_Nb_carte_main()*80,643));
     window.draw(spritecurseur);
     if (h==3){ /// pas assez de point d'action pour poser
     std::string textlourd= "Pas assez de point d'action !\n\n N'avez vous donc pas honte ?";
@@ -397,7 +399,7 @@ h=8;
 }
   
     else {
-    std::string textlourd= "Voulez vous poser cette carte ,\n\n appuyez sur espace pour confirmer\n\n passer  a la phase attaque avec B,\n\n passer son tour avec P";
+    std::string textlourd= "Voulez vous poser cette carte ,\n\n appuyez sur espace pour confirmer\n\n passer  a la phase attaque avec B,\n\n passer son tour avec P \n\n Verifier sa carte Speciale avec S";
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color::White);
     text.setPosition(890,63);
@@ -427,7 +429,7 @@ void Game::choix_attaquant(Joueur *joueur1,Terrain *unbeauterrain){
     std::string textlourd= unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
-    text.setPosition(415,439);
+    text.setPosition(36,262);
     window.draw(text);
     std::string textlourd2= "Voulez vous attaquer avec cette carte,\n\n appuyez A pour confirmer";
     sf::Text text2(textlourd2, font, 13);
@@ -437,14 +439,14 @@ void Game::choix_attaquant(Joueur *joueur1,Terrain *unbeauterrain){
     sf::Texture curseur;
     curseur.loadFromFile("Source/Images/cursor.png");
     sf::Sprite spritecurseur(curseur);
-    spritecurseur.setPosition(sf::Vector2f(450+indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()*100,570));
+    spritecurseur.setPosition(sf::Vector2f(450+indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()*100,480));
     window.draw(spritecurseur);
 }
 
 
 else {
 
-    std::string textlourd2= "Mais vous n'avez pas de monstre vous ne \n\n pas attaquer, Espace pour revenir";
+    std::string textlourd2= "Mais vous n'avez pas de monstre \n\nvous ne pouvez  pas attaquer, Espace pour revenir";
     sf::Text text2(textlourd2, font, 13);
     text2.setColor(sf::Color::White);
     text2.setPosition(890,63);
@@ -452,14 +454,19 @@ else {
 
 }
 }
-void Game::choix_attaque(Joueur *joueur2,Terrain *unbeauterrain){
+void Game::choix_attaque(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain){
     /// choix de la carte à attaquer 
      sf::Font font;
     font.loadFromFile("Source/Autres/belwe.ttf");
+      std::string textlourd4= unbeauterrain->get_carte_joueur1(joueur1->get_num())[indicecarteattaquant%unbeauterrain->get_carte_joueur1(joueur1->get_num()).size()].affichage();
+    sf::Text text4(textlourd4, font, 13);
+    text4.setColor(sf::Color(0,0,0));
+    text4.setPosition(36,262);
+    window.draw(text4);
      std::string textlourd= unbeauterrain->get_carte_joueur1(joueur2->get_num())[indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()].affichage();
     sf::Text text(textlourd, font, 13);
     text.setColor(sf::Color(0,0,0));
-    text.setPosition(474,280);
+    text.setPosition(939,286);
     window.draw(text);
     std::string textlourd2= "Voulez vous attaquer cette carte,\n\n appuyez C pour confirmer,\n\n D pour une attaque directe";
     sf::Text text2(textlourd2, font, 13);
@@ -469,7 +476,7 @@ void Game::choix_attaque(Joueur *joueur2,Terrain *unbeauterrain){
     sf::Texture curseur;
     curseur.loadFromFile("Source/Images/cursor.png");
     sf::Sprite spritecurseur(curseur);
-    spritecurseur.setPosition(sf::Vector2f(474+indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()*75,216));
+    spritecurseur.setPosition(sf::Vector2f(474+indicecarteattaque%unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()*75,146));
     window.draw(spritecurseur);
 }
 void Game::render(Joueur *joueur1,Joueur *joueur2,Terrain *unbeauterrain)
@@ -512,7 +519,7 @@ if (GameState==10){
 }
 if (GameState==6 && unbeauterrain->get_carte_joueur1(joueur2->get_num()).size() >0){
     /// On verifie qu'il y a une carte a attaquer
-   choix_attaque(joueur2,unbeauterrain);
+   choix_attaque(joueur1,joueur2,unbeauterrain);
 }
   if ((GameState==6) && (unbeauterrain->get_carte_joueur1(joueur2->get_num()).size()==0)){
     /// on passe à l'etat attaque direct si l'adversaire n'a pas de carte

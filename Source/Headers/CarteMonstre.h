@@ -25,7 +25,7 @@ public:
 
 	std::string affichage()const {
 
-		return _nom+ "\n\n\nPoint de vie : " +std::to_string(_pdv)+" Point d' action : "+std::to_string(_pts_action)+ " Point d'attaque :" +std::to_string(_pts_atk);
+		return _nom+ "\n\n\nPoint de vie : " +std::to_string(_pdv)+" Point d' action : "+std::to_string(_pts_action)+ "\n\n Point d'attaque :" +std::to_string(_pts_atk);
 
 	}
 };
